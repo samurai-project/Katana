@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "Katana"
 include(":app")
 include(":core-data")
+include(":core-network")
