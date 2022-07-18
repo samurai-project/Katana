@@ -1,6 +1,7 @@
 package dev.nmgalo.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dev.nmgalo.core.model.wall.Wall
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -13,12 +14,12 @@ import javax.inject.Singleton
 @Singleton
 class ApiClient @Inject constructor(
     json: Json
-): KatanaNetworkDataSource {
+) : KatanaNetworkDataSource {
 
 
     @OptIn(ExperimentalSerializationApi::class)
     private val networkApi = Retrofit.Builder()
-        .baseUrl("")
+        .baseUrl("https://jsonplaceholder.typicode.com/")
         .client(
             OkHttpClient.Builder()
                 .addInterceptor(
@@ -32,5 +33,6 @@ class ApiClient @Inject constructor(
         .build()
         .create(KatanaNetworkApi::class.java)
 
-    override suspend fun getWall(): List<String> = networkApi.getWall()
+    override suspend fun getWall(): List<Wall> =
+        networkApi.getWall().map { Wall(id = it.id, title = it.title) }
 }

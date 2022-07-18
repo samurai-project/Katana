@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.nmgalo.katana">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".KatanaApp"
         android:allowBackup="true"
