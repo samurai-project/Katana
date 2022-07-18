@@ -19,7 +19,7 @@ private val LightColorPalette = lightColorScheme(
 
 @Composable
 fun KatanaTheme(
-    darkTheme: Boolean = true, // TODO(nmgalo): Use isSystemInDarkTheme() in the future.
+    darkTheme: Boolean = false, // TODO(nmgalo): Use isSystemInDarkTheme() in the future.
     content: @Composable () -> Unit
 ) {
 

@@ -1,22 +1,19 @@
 package dev.nmgalo.katana.ui
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import dev.nmgalo.feature.wall.WallScreen
 import dev.nmgalo.katana.ui.theme.KatanaTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun KatanaApp() {
+    val navController = rememberNavController()
     KatanaTheme {
-        Scaffold(
-            containerColor = Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.onBackground,
-        ) { _ ->
-            Text(text = "Nick is awesome")
+        NavHost(navController = navController, startDestination = "wall") {
+            composable("wall") { WallScreen() }
         }
     }
 }

@@ -25,3 +25,6 @@ rootProject.name = "Katana"
 include(":app")
 include(":core-data")
 include(":core-network")
+include(":core-model")
+include(":core-common")
+include(":feature-wall")
