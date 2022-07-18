@@ -20,9 +20,7 @@ class WallViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            wallRepository.getWall().collect {
-                _wallState.tryEmit(WallUiState.Success(it))
-            }
+            _wallState.tryEmit(WallUiState.Success(wallRepository.getWall()))
         }
     }
 
