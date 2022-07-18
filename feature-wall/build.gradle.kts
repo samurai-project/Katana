@@ -35,6 +35,8 @@ dependencies {
 
     implementation(libs.androidx.hilt.navigation.compose)
 
+    implementation(libs.coil.kt)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
