@@ -1,5 +1,8 @@
 package dev.nmgalo.katana.ui.theme
 
-const val PURPLE_200 = 0xFFBB86FC
-const val PURPLE_500 = 0xFF6200EE
-const val TEAL_200 = 0xFF03DAC5
+const val RED_200 = 0xfff297a2
+const val RED_300 = 0xffea6d7e
+const val RED_700 = 0xffdd0d3c
+const val RED_800 = 0xffd00036
+const val RED_900 = 0xffc20029
+
