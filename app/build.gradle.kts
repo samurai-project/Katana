@@ -40,8 +40,11 @@ android {
     buildFeatures {
         compose = true
     }
+
+    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
+        kotlinCompilerExtensionVersion =
+            libs.findVersion("androidxComposeCompiler").get().toString()
     }
     packagingOptions {
         resources {
