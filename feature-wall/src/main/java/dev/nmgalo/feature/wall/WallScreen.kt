@@ -79,7 +79,7 @@ fun WallItem(modifier: Modifier = Modifier, item: Wall) {
             .clickable { },
     ) {
         AsyncImage(
-            model = "https://picsum.photos/536/355",
+            model = "https://loremflickr.com/536/355",
             contentScale = ContentScale.Crop,
             contentDescription = item.title,
             modifier = modifier

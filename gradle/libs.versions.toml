@@ -18,6 +18,11 @@ retrofitKotlinxSerializationJson = "0.8.0"
 androidxNavigation = "2.5.0"
 androidxHiltNavigationCompose = "1.0.0"
 coil = "2.1.0"
+screengrab = "2.1.1"
+junit = "4.13"
+androidxTest = "1.4.0"
+androidxTestExt = "1.1.3"
+androidxEspresso = "3.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
@@ -42,6 +47,13 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxTest" }
+androidx-test-core = { group = "androidx.test", name = "core", version.ref = "androidxTest" }
+androidx-test-ext = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "androidxTestExt" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTest" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTest" }
 kotlin-serializationPlugin = { group = "org.jetbrains.kotlin", name = "kotlin-serialization", version.ref = "kotlin" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
