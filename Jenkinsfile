@@ -1,7 +1,6 @@
 pipeline {
     agent any
     stages {
-        echo "${env.ANDROID_HOME}" >> local.properties
         stage('Compile'){
             steps{
                 sh "chmod +x ./gradlew"
