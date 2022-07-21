@@ -12,9 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class KatanaNetworkClient @Inject constructor(
-    json: Json
-) : KatanaNetworkDataSource {
+class KatanaNetworkClient @Inject constructor(json: Json) : KatanaNetworkDataSource {
 
 
     @OptIn(ExperimentalSerializationApi::class)

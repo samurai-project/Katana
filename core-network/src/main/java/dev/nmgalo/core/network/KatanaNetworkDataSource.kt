@@ -7,5 +7,4 @@ import dev.nmgalo.core.model.wall.Wall
  */
 interface KatanaNetworkDataSource {
     suspend fun getWall(): List<Wall>
-
 }
