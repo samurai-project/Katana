@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.nmgalo.core.network.ApiClient
+import dev.nmgalo.core.network.KatanaNetworkClient
 import dev.nmgalo.core.network.KatanaNetworkDataSource
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 interface NetworkModule {
 
     @Binds
-    fun bindsKatanaNetwork(apiClient: ApiClient): KatanaNetworkDataSource
+    fun bindsKatanaNetwork(katanaNetworkClient: KatanaNetworkClient): KatanaNetworkDataSource
 
     companion object {
         @Provides

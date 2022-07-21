@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ApiClient @Inject constructor(
+class KatanaNetworkClient @Inject constructor(
     json: Json
 ) : KatanaNetworkDataSource {
 
