@@ -15,7 +15,7 @@ private val DarkThemeColors = darkColorScheme(
     secondary = Color(RED_700),
     onSecondary = Color.Black,
     error = Color(RED_800),
-    onBackground = Color.Black,
+    onBackground = Color.White,
 )
 
 private val LightThemeColors = lightColorScheme(
@@ -24,7 +24,7 @@ private val LightThemeColors = lightColorScheme(
     secondary = Color(RED_700),
     onSecondary = Color.White,
     error = Color(RED_800),
-    onBackground = Color.White,
+    onBackground = Color.Black,
 )
 
 @Composable

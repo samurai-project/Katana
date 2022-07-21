@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import dev.nmgalo.core.model.wall.Wall
 
@@ -21,7 +22,9 @@ import dev.nmgalo.core.model.wall.Wall
 @Composable
 fun WallScreen(
     modifier: Modifier = Modifier,
-    viewModel: WallViewModel = hiltViewModel()
+    viewModel: WallViewModel = hiltViewModel(),
+    navController: NavController,
+    openDrawer: () -> Unit
 ) {
     val wallState = viewModel.wallState.collectAsState()
     Scaffold(
@@ -29,19 +32,29 @@ fun WallScreen(
             SmallTopAppBar(
                 title = { Text("Wall") },
                 navigationIcon = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { openDrawer() }) {
                         Icon(
                             imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
+                            contentDescription = "Menu"
                         )
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Filled.AccountCircle,
-                            contentDescription = "Localized description"
-                        )
+                    IconButton(onClick = {
+                        navController.navigate("messenger")
+                    }) {
+                        BadgedBox(
+                            badge = {
+                                Badge {
+                                    Text(text = "3", color = Color.White)
+                                }
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Sms,
+                                contentDescription = "Chat"
+                            )
+                        }
                     }
                 }
             )

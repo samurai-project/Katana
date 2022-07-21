@@ -3,6 +3,6 @@
 
     <style name="Theme.Katana" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/status_bar</item>
-        <item name="android:background">@color/status_bar</item>
+        <item name="android:background">@color/background</item>
     </style>
 </resources>
