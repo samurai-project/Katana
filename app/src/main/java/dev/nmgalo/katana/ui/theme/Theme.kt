@@ -9,21 +9,22 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 
 
-private val DarkColorPalette = darkColorScheme(
+private val DarkThemeColors = darkColorScheme(
     primary = Color(RED_300),
     onPrimary = Color.Black,
     secondary = Color(RED_700),
+    onSecondary = Color.Black,
     error = Color(RED_800),
     onBackground = Color.Black,
 )
 
-private val LightColorPalette = lightColorScheme(
+private val LightThemeColors = lightColorScheme(
     primary = Color(RED_700),
     onPrimary = Color.White,
     secondary = Color(RED_700),
     onSecondary = Color.White,
     error = Color(RED_800),
-    onBackground = Color.Black,
+    onBackground = Color.White,
 )
 
 @Composable
@@ -32,15 +33,9 @@ fun KatanaTheme(
     content: @Composable () -> Unit
 ) {
 
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
-
     CompositionLocalProvider {
         MaterialTheme(
-            colorScheme = colors,
+            colorScheme = if (darkTheme) DarkThemeColors else LightThemeColors,
             typography = KatanaTypography,
             content = content
         )
