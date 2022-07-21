@@ -9,9 +9,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
@@ -43,28 +45,35 @@ fun ChatScreen(
             contentPadding = padding,
             modifier = modifier.fillMaxSize()
         ) {
-            items(25) {
+            items(6) {
                 Row(
                     modifier = modifier
-                        .padding(all = 11.dp)
+                        .padding(all = 10.dp)
                         .fillMaxSize()
-                        .clickable {  }
+                        .clickable { },
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
-                        model = "https://loremflickr.com/536/350",
+                        model = "https://loremflickr.com/536/536",
                         contentDescription = "Contact profile picture",
                         modifier = modifier
-                            .size(40.dp)
+                            .padding(all = 5.dp)
+                            .size(70.dp)
                             .clip(CircleShape)
                             .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
                     )
 
-                    Spacer(modifier = modifier.width(10.dp))
+                    Spacer(modifier = modifier.width(15.dp))
 
                     Column {
-                        Text(text = "Hitler", style = MaterialTheme.typography.titleMedium)
+                        Text(text = "Jane doe", style = MaterialTheme.typography.titleMedium)
                         Spacer(modifier = modifier.height(2.dp))
-                        Text(text = "Heil hitler", style = MaterialTheme.typography.titleSmall)
+                        Text(
+                            text = "ნიკა გამარჯობა, ეიჩარივარ, არსაიდან...",
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                            style = MaterialTheme.typography.titleSmall
+                        )
                     }
                 }
             }
