@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import dev.nmgalo.katana.navigation.KatanaDestinations
+import dev.nmgalo.katana.navigation.KatanaRoutes
 
 @Composable
 fun AppDrawer(
@@ -27,10 +27,10 @@ fun AppDrawer(
             icon = Icons.Filled.Home,
             label = "Home",
             action = {
-                navigateTo(KatanaDestinations.WALL)
+                navigateTo(KatanaRoutes.WALL)
                 closeDrawer()
             },
-            isSelected = currentRoute == KatanaDestinations.WALL
+            isSelected = currentRoute == KatanaRoutes.WALL
         )
     }
 }
@@ -83,7 +83,8 @@ private fun DrawerButton(
         modifier = modifier
             .padding(start = 8.dp, top = 8.dp, end = 8.dp)
             .fillMaxWidth(),
-        shape = MaterialTheme.shapes.small, color = backgroundColor
+        shape = MaterialTheme.shapes.small,
+        color = backgroundColor
     ) {
         TextButton(
             onClick = action,

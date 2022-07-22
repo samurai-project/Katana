@@ -16,7 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.qarva.feature.messenger.ChatScreen
 import dev.nmgalo.feature.wall.WallScreen
-import dev.nmgalo.katana.navigation.KatanaDestinations
+import dev.nmgalo.katana.navigation.KatanaRoutes
 import dev.nmgalo.katana.ui.theme.KatanaTheme
 import kotlinx.coroutines.launch
 
@@ -27,7 +27,7 @@ fun KatanaApp() {
 
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route ?: KatanaDestinations.WALL
+    val currentRoute = navBackStackEntry?.destination?.route ?: KatanaRoutes.WALL
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
@@ -45,13 +45,13 @@ fun KatanaApp() {
                 )
             }
         ) {
-            NavHost(navController = navController, startDestination = KatanaDestinations.WALL) {
-                composable(KatanaDestinations.WALL) {
+            NavHost(navController = navController, startDestination = KatanaRoutes.WALL) {
+                composable(KatanaRoutes.WALL) {
                     WallScreen(navController = navController) {
                         coroutineScope.launch { drawerState.open() }
                     }
                 }
-                composable(KatanaDestinations.MESSENGER) {
+                composable(KatanaRoutes.MESSENGER) {
                     ChatScreen(navController = navController)
                 }
             }

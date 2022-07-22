@@ -69,7 +69,7 @@ fun ChatScreen(
                         Text(text = "Jane doe", style = MaterialTheme.typography.titleMedium)
                         Spacer(modifier = modifier.height(2.dp))
                         Text(
-                            text = "ნიკა გამარჯობა, ეიჩარივარ, არსაიდან...",
+                            text = "ნიკა გამარჯობა, მე ვარ ბონო, ნახალოვკლეი ბონო :დდდ",
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.titleSmall
