@@ -1,4 +1,4 @@
-package com.qarva.feature.messenger
+package dev.nmgalo.feature.messenger
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable

@@ -14,7 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.qarva.feature.messenger.ChatScreen
+import dev.nmgalo.feature.messenger.ChatScreen
 import dev.nmgalo.feature.wall.WallScreen
 import dev.nmgalo.katana.navigation.KatanaRoutes
 import dev.nmgalo.katana.ui.theme.KatanaTheme
