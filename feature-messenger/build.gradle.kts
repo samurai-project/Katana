@@ -12,8 +12,10 @@ android {
         targetSdk = 32
     }
 
+    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
+        kotlinCompilerExtensionVersion =
+            libs.findVersion("androidxComposeCompiler").get().toString()
     }
 
     buildFeatures {
