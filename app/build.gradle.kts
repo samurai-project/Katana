@@ -1,6 +1,5 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("katana.android.application")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
@@ -24,12 +23,8 @@ detekt {
 }
 
 android {
-    compileSdk = 32
-
     defaultConfig {
         applicationId = "dev.nmgalo.katana"
-        minSdk = 24
-        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -40,6 +35,9 @@ android {
     }
 
     buildTypes {
+        val debug by getting {
+            applicationIdSuffix = ".debug"
+        }
         val release by getting {
             isMinifyEnabled = true
             proguardFiles(
