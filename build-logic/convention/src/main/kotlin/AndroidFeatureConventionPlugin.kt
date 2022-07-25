@@ -17,11 +17,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.kapt")
             }
             extensions.configure<LibraryExtension> {
-                compileSdk = 32
+                compileSdk = AppConfig.COMPILE_SDK
 
                 defaultConfig {
-                    minSdk = 24
-                    targetSdk = 32
+                    minSdk = AppConfig.MIN_SDK
+                    targetSdk = AppConfig.TARGET_SDK
                 }
 
                 composeOptions {
