@@ -9,10 +9,11 @@ interested in or follow specific user.
 
 # Preview
 
-![Screenshot 1](docs/screenshot-1.png "Screenshot 1")
-![Screenshot 2](docs/screenshot-2.png "Screenshot 2")
-![Screenshot 2](docs/screenshot-3.png "Screenshot 3")
-
+<p align="center" width="100%">
+    <img src="./docs/screenshot-1.png" alt="App Screenshot" width="30%" />
+    <img src="./docs/screenshot-2.png" alt="App Screenshot" width="30%" />
+    <img src="./docs/screenshot-3.png" alt="App Screenshot" width="30%" />
+</p>
 
 # Architecture
 
