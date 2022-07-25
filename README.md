@@ -86,7 +86,7 @@ minimize its downsides.
 
 ![Diagram showing types of modules and their dependencies in Katana](docs/modularization-graph.jpeg "Diagram showing types of modules and their dependencies in Katana")
 
-The Now in Android app contains the following types of modules:
+The katana app contains the following types of modules:
 
 * The `app` module - contains app level and scaffolding classes that bind the rest of the codebase,
   such as `MainActivity`, `KatanaApp` and app-level controlled navigation. The `app` module depends
