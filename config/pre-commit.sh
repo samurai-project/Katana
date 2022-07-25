@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# You can use it by running this command from the project root:
-# `ln -s ../../config/pre-push.sh .git/hooks/pre-push`
+# Or You can use it by running this command from the project root:
+# `ln -s ../../config/pre-commit.sh .git/hooks/pre-commit`
 
 echo "Running detekt."
 
