@@ -8,12 +8,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 
-object AppConfig {
-    const val MIN_SDK = 24
-    const val TARGET_SDK = 32
-    const val COMPILE_SDK = 32
-}
-
 /**
  * Configure base Kotlin with Android options
  */
