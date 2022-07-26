@@ -27,7 +27,6 @@ import androidx.navigation.NavController
 @Composable
 fun ChatScreen(navController: NavController, modifier: Modifier = Modifier) {
 
-    /*TODO: You know ;))*/
     /*val userId = navController.currentBackStackEntry?.arguments?.get("userId")*/
 
     Scaffold(

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -43,7 +44,6 @@ import dev.nmgalo.core.model.wall.Wall
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WallScreen(
-    modifier: Modifier = Modifier,
     viewModel: WallViewModel = hiltViewModel(),
     navController: NavController,
     openDrawer: () -> Unit
@@ -85,29 +85,36 @@ fun WallScreen(
         contentColor = MaterialTheme.colorScheme.onBackground,
     ) { padding ->
         when (val state = wallState.value) {
-            WallUiState.Loading -> {
-                Box(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-            is WallUiState.Success -> {
-                LazyColumn(
-                    contentPadding = padding,
-                    modifier = modifier.fillMaxSize()
-                ) {
-                    items(state.wall) { wallItem ->
-                        WallItem(item = wallItem)
-                    }
-                }
-            }
+            WallUiState.Loading -> Loader(padding = padding)
+            is WallUiState.Success -> ChatList(padding = padding, wall = state.wall)
         }
     }
 }
+
+@Composable
+fun Loader(modifier: Modifier = Modifier, padding: PaddingValues) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(padding),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun ChatList(modifier: Modifier = Modifier, padding: PaddingValues, wall: List<Wall>) {
+    LazyColumn(
+        contentPadding = padding,
+        modifier = modifier.fillMaxSize()
+    ) {
+        items(wall) { wallItem ->
+            WallItem(item = wallItem)
+        }
+    }
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
