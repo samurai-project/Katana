@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -26,8 +27,10 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Badge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -81,17 +84,22 @@ fun WallScreen(
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
     ) { padding ->
-        LazyColumn(
-            contentPadding = padding,
-            modifier = modifier.fillMaxSize()
-        ) {
-            when (val state = wallState.value) {
-                WallUiState.Loading -> {
-                    item {
-                        Text("Loading")
-                    }
+        when (val state = wallState.value) {
+            WallUiState.Loading -> {
+                Box(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(padding),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
                 }
-                is WallUiState.Success -> {
+            }
+            is WallUiState.Success -> {
+                LazyColumn(
+                    contentPadding = padding,
+                    modifier = modifier.fillMaxSize()
+                ) {
                     items(state.wall) { wallItem ->
                         WallItem(item = wallItem)
                     }

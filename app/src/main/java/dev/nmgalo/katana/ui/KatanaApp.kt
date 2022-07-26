@@ -10,10 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import dev.nmgalo.feature.messenger.ChatListScreen
 import dev.nmgalo.feature.messenger.ChatScreen
 import dev.nmgalo.feature.wall.WallScreen
 import dev.nmgalo.katana.navigation.KatanaRoutes
@@ -52,6 +55,12 @@ fun KatanaApp() {
                     }
                 }
                 composable(KatanaRoutes.MESSENGER) {
+                    ChatListScreen(navController = navController)
+                }
+                composable(
+                    route = KatanaRoutes.CHAT,
+                    arguments = listOf(navArgument("userId") { type = NavType.LongType })
+                ) {
                     ChatScreen(navController = navController)
                 }
             }
