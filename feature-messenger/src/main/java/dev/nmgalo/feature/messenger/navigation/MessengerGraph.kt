@@ -11,8 +11,8 @@ import dev.nmgalo.feature.messenger.ChatScreen
 
 
 fun NavGraphBuilder.messengerGraph(navController: NavController) {
-    navigation(startDestination = "messenger", route = "messenger") {
-        composable("messenger") {
+    navigation(startDestination = "list", route = "messenger") {
+        composable("list") {
             ChatListScreen(navController = navController)
         }
         composable(

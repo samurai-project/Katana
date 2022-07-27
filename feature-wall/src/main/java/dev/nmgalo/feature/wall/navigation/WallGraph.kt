@@ -7,8 +7,8 @@ import androidx.navigation.navigation
 import dev.nmgalo.feature.wall.WallScreen
 
 fun NavGraphBuilder.wallGraph(navController: NavController, openDrawer: () -> Unit) {
-    navigation(startDestination = "wall", route = "wall") {
-        composable("wall") {
+    navigation(startDestination = "home", route = "wall") {
+        composable("home") {
             WallScreen(navController = navController, openDrawer = openDrawer)
         }
     }
