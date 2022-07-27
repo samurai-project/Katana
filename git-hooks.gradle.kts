@@ -37,5 +37,6 @@ tasks {
 
     afterEvaluate {
         tasks["clean"].dependsOn(tasks.named("installGitHooks"))
+        tasks.getByPath(":app:assemble").dependsOn(tasks.named("installGitHooks"))
     }
 }
