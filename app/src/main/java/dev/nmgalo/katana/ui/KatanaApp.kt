@@ -44,10 +44,7 @@ fun KatanaApp() {
             }
         ) {
             NavHost(navController = navController, startDestination = "wall") {
-                wallGraph(
-                    navController = navController,
-                    openDrawer = { scope.launch { drawerState.open() } }
-                )
+                wallGraph(navController = navController) { scope.launch { drawerState.open() } }
                 messengerGraph(navController = navController)
             }
         }
