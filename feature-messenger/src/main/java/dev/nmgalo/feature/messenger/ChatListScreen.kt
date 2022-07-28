@@ -1,7 +1,8 @@
 package dev.nmgalo.feature.messenger
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -33,7 +34,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 
 @Suppress("LongMethod")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ChatListScreen(
     modifier: Modifier = Modifier,
@@ -70,9 +71,14 @@ fun ChatListScreen(
                     modifier = modifier
                         .padding(all = 10.dp)
                         .fillMaxSize()
-                        .clickable {
-                            navController.navigate("chat/1")
-                        },
+                        .combinedClickable(
+                            onLongClick = {
+                                TODO("Later !!!")
+                            },
+                            onClick = {
+                                navController.navigate("chat/1")
+                            }
+                        ),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
