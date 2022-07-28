@@ -43,6 +43,8 @@ data layer at the bottom, the key concepts are:
 * Events flow down.
 * Data flows up.
 
+![Sample architecture in katana app](docs/architecture-sample.jpeg "Sample architecture in katana app")
+
 # Modularization
 
 ## Overview
