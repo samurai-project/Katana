@@ -8,12 +8,16 @@ import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import dev.nmgalo.feature.messenger.ChatListScreen
 import dev.nmgalo.feature.messenger.ChatScreen
+import dev.nmgalo.feature.messenger.ChatSettingsScreen
 
 
 fun NavGraphBuilder.messengerGraph(navController: NavController) {
     navigation(startDestination = "list", route = "messenger") {
         composable("list") {
             ChatListScreen(navController = navController)
+        }
+        composable("settings") {
+            ChatSettingsScreen(navController = navController)
         }
         composable(
             route = "chat/{chatId}",
