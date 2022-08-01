@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ExpandCircleDown
-import androidx.compose.material.icons.filled.PhoneInTalk
 import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,7 +26,7 @@ import androidx.navigation.NavController
 @Composable
 fun ChatScreen(navController: NavController, modifier: Modifier = Modifier) {
 
-    /*val userId = navController.currentBackStackEntry?.arguments?.get("userId")*/
+    val userId = navController.currentBackStackEntry?.arguments?.get("userId")
 
     Scaffold(
         topBar = {
@@ -48,16 +47,10 @@ fun ChatScreen(navController: NavController, modifier: Modifier = Modifier) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = { navController.navigate("group-call/$userId") }) {
                         Icon(
                             imageVector = Icons.Filled.Videocam,
                             contentDescription = "Video Call"
-                        )
-                    }
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(
-                            imageVector = Icons.Filled.PhoneInTalk,
-                            contentDescription = "Phone Call"
                         )
                     }
                     IconButton(onClick = { /*TODO*/ }) {
@@ -72,7 +65,6 @@ fun ChatScreen(navController: NavController, modifier: Modifier = Modifier) {
         containerColor = Color.Transparent,
         contentColor = MaterialTheme.colorScheme.onBackground,
     ) { padding ->
-
         Column(modifier = modifier.padding(padding)) {
             LazyColumn(
                 contentPadding = padding,

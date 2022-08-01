@@ -24,5 +24,9 @@ gradlePlugin {
             id = "katana.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "katana.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }
