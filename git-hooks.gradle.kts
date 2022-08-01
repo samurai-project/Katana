@@ -34,9 +34,4 @@ tasks {
         group = "git hooks"
         delete(fileTree(".git/hooks/"))
     }
-
-    afterEvaluate {
-        tasks["clean"].dependsOn(tasks.named("installGitHooks"))
-        tasks.getByPath("app:assemble").dependsOn(tasks.named("installGitHooks"))
-    }
 }

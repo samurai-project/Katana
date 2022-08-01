@@ -28,6 +28,14 @@ tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
 
+subprojects {
+    tasks.whenTaskAdded {
+        if (name == "preBuild") {
+            mustRunAfter(":installGitHooks")
+        }
+    }
+}
+
 buildscript {
     repositories {
         google()
