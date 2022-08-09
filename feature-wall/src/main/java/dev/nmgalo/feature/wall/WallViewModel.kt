@@ -4,24 +4,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.nmgalo.core.data.wall.WallRepository
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class WallViewModel @Inject constructor(
     wallRepository: WallRepository
 ) : ViewModel() {
 
-    private val _wallState = MutableStateFlow<WallUiState>(WallUiState.Loading)
-    val wallState: StateFlow<WallUiState> = _wallState
-
-    init {
-        viewModelScope.launch {
-            _wallState.tryEmit(WallUiState.Success(wallRepository.getWall()))
-        }
-    }
-
+    val wallState: StateFlow<WallUiState> = wallRepository.getWall()
+        .flatMapLatest {
+            if (it.isNotEmpty()) {
+                flowOf(WallUiState.Success(it))
+            } else
+                flowOf(WallUiState.Error)
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = WallUiState.Loading
+        )
 }

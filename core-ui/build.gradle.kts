@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
 }

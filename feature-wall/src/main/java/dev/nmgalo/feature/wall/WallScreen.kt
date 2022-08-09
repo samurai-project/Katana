@@ -86,6 +86,7 @@ fun WallScreen(
     ) { padding ->
         when (val state = wallState.value) {
             WallUiState.Loading -> Loader(padding = padding)
+            WallUiState.Error -> Text("An error occurred, changed this error later!")
             is WallUiState.Success -> ChatList(padding = padding, wall = state.wall)
         }
     }
