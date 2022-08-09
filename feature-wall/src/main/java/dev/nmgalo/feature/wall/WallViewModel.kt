@@ -26,7 +26,11 @@ class WallViewModel @Inject constructor(
                 flowOf(WallUiState.Error)
         }.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
+            started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
             initialValue = WallUiState.Loading
         )
+
+    companion object {
+        const val STOP_TIMEOUT_MILLIS: Long = 5_000
+    }
 }
