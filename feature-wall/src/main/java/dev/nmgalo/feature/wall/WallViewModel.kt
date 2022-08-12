@@ -22,8 +22,7 @@ class WallViewModel @Inject constructor(
         .flatMapLatest {
             if (it.isNotEmpty()) {
                 flowOf(WallUiState.Success(it))
-            } else
-                flowOf(WallUiState.Error)
+            } else flowOf(WallUiState.Error)
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
