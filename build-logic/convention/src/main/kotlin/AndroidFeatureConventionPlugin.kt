@@ -35,30 +35,32 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
+                add("implementation", fileTree("libs") { include("*.jar") })
+
                 add("implementation", project(":core-model"))
                 add("implementation", project(":core-data"))
                 add("implementation", project(":core-common"))
                 add("implementation", project(":core-ui"))
 
-                add("implementation", libs.findDependency("coil.kt").get())
+                add("implementation", libs.findLibrary("coil.kt").get())
 
-                add("implementation", libs.findDependency("androidx.hilt.navigation.compose").get())
-
-                add(
-                    "implementation",
-                    libs.findDependency("androidx.compose.material.iconsExtended").get()
-                )
-                add("implementation", libs.findDependency("androidx.compose.material3").get())
+                add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
 
                 add(
                     "implementation",
-                    libs.findDependency("androidx.lifecycle.viewModelCompose").get()
+                    libs.findLibrary("androidx.compose.material.iconsExtended").get()
+                )
+                add("implementation", libs.findLibrary("androidx.compose.material3").get())
+
+                add(
+                    "implementation",
+                    libs.findLibrary("androidx.lifecycle.viewModelCompose").get()
                 )
 
-                add("implementation", libs.findDependency("kotlinx.coroutines.android").get())
+                add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
 
-                add("implementation", libs.findDependency("hilt.android").get())
-                add("kapt", libs.findDependency("hilt.compiler").get())
+                add("implementation", libs.findLibrary("hilt.android").get())
+                add("kapt", libs.findLibrary("hilt.compiler").get())
             }
         }
     }

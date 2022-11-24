@@ -1,5 +1,6 @@
 package dev.nmgalo.feature.messenger
 
+import android.view.LayoutInflater
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,17 +25,45 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import dev.nmgalo.core.ui.withAlpha
+import org.webrtc.SurfaceViewRenderer
 
 @Composable
 fun GroupCallScreen(navController: NavController, modifier: Modifier = Modifier) {
+
+    val webRtcSessionManager = ServiceLocator.webRtcSessionManager
+    webRtcSessionManager.onSessionScreenReady()
+
     Box(
         modifier = Modifier
             .background(Color.Gray)
             .fillMaxSize(),
     ) {
-        Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
+
+        AndroidView(factory = { context ->
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.webrtc_surface_view_renderer, null, false)
+
+            with(view.findViewById<SurfaceViewRenderer>(R.id.remoteView)) {
+                init(ServiceLocator.eglBaseContext, null)
+                setEnableHardwareScaler(true)
+            }
+
+            with(view.findViewById<SurfaceViewRenderer>(R.id.localVideo)) {
+                init(ServiceLocator.eglBaseContext, null)
+                setEnableHardwareScaler(true)
+                setMirror(true)
+            }
+
+            view
+        })
+
+        Column(
+            modifier = modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Bottom
+        ) {
             Row(
                 modifier = modifier
                     .fillMaxWidth()
@@ -44,7 +73,10 @@ fun GroupCallScreen(navController: NavController, modifier: Modifier = Modifier)
                 ChatActionItem(imageVector = Icons.Filled.VideocamOff) {}
                 ChatActionItem(imageVector = Icons.Filled.VolumeOff) {}
                 ChatActionItem(imageVector = Icons.Filled.PersonAdd) {}
-                ChatActionItem(imageVector = Icons.Filled.PhoneDisabled, background = Color.Red) {
+                ChatActionItem(
+                    imageVector = Icons.Filled.PhoneDisabled,
+                    background = Color.Red
+                ) {
                     navController.popBackStack()
                 }
             }

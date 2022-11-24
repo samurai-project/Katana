@@ -1,16 +1,7 @@
 plugins {
-    id("com.android.library")
+    id("katana.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-}
-
-android {
-    compileSdk = 32
-
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 32
-    }
 }
 
 dependencies {

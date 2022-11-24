@@ -1,18 +1,9 @@
 plugins {
-    id("com.android.library")
+    id("katana.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlinx-serialization")
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
-}
-
-android {
-    compileSdk = 32
-
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 32
-    }
 }
 
 dependencies {
