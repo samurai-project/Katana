@@ -1,9 +1,9 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.p2p
 
 import android.content.Context
-import dev.nmgalo.feature.messenger.rtc.SignalingClient
-import dev.nmgalo.feature.messenger.rtc.session.PeerConnectionUtils
-import dev.nmgalo.feature.messenger.rtc.session.WebRtcSessionManager
+import dev.nmgalo.feature.messenger.p2p.rtc.SignalingClient
+import dev.nmgalo.feature.messenger.p2p.rtc.session.PeerConnectionUtils
+import dev.nmgalo.feature.messenger.p2p.rtc.session.WebRtcSessionManager
 import org.webrtc.EglBase
 import java.lang.ref.WeakReference
 
@@ -29,7 +29,7 @@ object ServiceLocator {
     val eglBaseContext: EglBase.Context = EglBase.create().eglBaseContext
 
     fun initWithContext(context: Context) {
-        this.context = WeakReference<Context>(context)
+        ServiceLocator.context = WeakReference<Context>(context)
     }
 
     init {

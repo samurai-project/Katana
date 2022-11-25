@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger.rtc
+package dev.nmgalo.feature.messenger.p2p.rtc
 
 enum class SignalingCommand {
     /*

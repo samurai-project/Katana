@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger.rtc.session
+package dev.nmgalo.feature.messenger.p2p.rtc.session
 
 import android.content.Context
 import org.webrtc.BuiltinAudioDecoderFactoryFactory

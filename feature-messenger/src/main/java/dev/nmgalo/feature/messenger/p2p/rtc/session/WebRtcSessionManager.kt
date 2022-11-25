@@ -1,15 +1,17 @@
-package dev.nmgalo.feature.messenger.rtc.session
+package dev.nmgalo.feature.messenger.p2p.rtc.session
 
 import android.content.Context
-import dev.nmgalo.feature.messenger.rtc.SignalingClient
-import dev.nmgalo.feature.messenger.rtc.SignalingCommand
+import dev.nmgalo.feature.messenger.p2p.rtc.SignalingClient
+import dev.nmgalo.feature.messenger.p2p.rtc.SignalingCommand
 import java.util.UUID
 import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.webrtc.*
 import org.webrtc.MediaStreamTrack.VIDEO_TRACK_KIND
@@ -28,11 +30,11 @@ class WebRtcSessionManager(
     private val sessionManagerScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val peerConnectionExecutor = Executors.newSingleThreadExecutor()
 
-    private val _localVideoSinkFlow = MutableSharedFlow<VideoTrack>()
-    val localVideoSinkFlow: SharedFlow<VideoTrack> = _localVideoSinkFlow
+    private val _localVideoSinkFlow = MutableStateFlow<VideoTrack?>(null)
+    val localVideoSinkFlow: StateFlow<VideoTrack?> = _localVideoSinkFlow
 
-    private val _remoteVideoSinkFlow = MutableSharedFlow<VideoTrack>()
-    val remoteVideoSinkFlow: SharedFlow<VideoTrack> = _remoteVideoSinkFlow
+    private val _remoteVideoSinkFlow = MutableStateFlow<VideoTrack?>(null)
+    val remoteVideoSinkFlow: StateFlow<VideoTrack?> = _remoteVideoSinkFlow
 
     private val mediaConstraints = MediaConstraints().apply {
         mandatory.add(

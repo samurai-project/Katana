@@ -9,7 +9,7 @@ import androidx.navigation.navigation
 import dev.nmgalo.feature.messenger.ChatListScreen
 import dev.nmgalo.feature.messenger.ChatScreen
 import dev.nmgalo.feature.messenger.ChatSettingsScreen
-import dev.nmgalo.feature.messenger.GroupCallScreen
+import dev.nmgalo.feature.messenger.p2p.GroupCallScreen
 
 
 fun NavGraphBuilder.messengerGraph(navController: NavController) {

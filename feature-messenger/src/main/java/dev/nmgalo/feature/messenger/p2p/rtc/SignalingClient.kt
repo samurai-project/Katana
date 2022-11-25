@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger.rtc
+package dev.nmgalo.feature.messenger.p2p.rtc
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +14,7 @@ import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
 // TODO: provide with DI
-private const val SIGNALING_URL = "ws://192.168.31.53:8080/rtc"
+private const val SIGNALING_URL = "ws://192.168.100.9:8080/rtc"
 
 class SignalingClient {
     private val signalingScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)

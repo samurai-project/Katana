@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger.rtc.session
+package dev.nmgalo.feature.messenger.p2p.rtc.session
 
 import org.webrtc.SdpObserver
 import org.webrtc.SessionDescription

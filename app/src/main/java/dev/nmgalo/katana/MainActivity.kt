@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import dagger.hilt.android.AndroidEntryPoint
-import dev.nmgalo.feature.messenger.ServiceLocator
+import dev.nmgalo.feature.messenger.p2p.ServiceLocator
 import dev.nmgalo.katana.ui.KatanaApp
 
 @AndroidEntryPoint
