@@ -66,7 +66,7 @@ class WebRtcSessionManager(
     private var offer: String? = null
 
     private val peerConnection: PeerConnection by lazy {
-        createNewPeerConnection() ?: error("peer connectrio initialization failed")
+        createNewPeerConnection() ?: error("peer connection initialization failed")
     }
 
     init {

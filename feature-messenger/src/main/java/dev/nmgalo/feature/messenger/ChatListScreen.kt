@@ -66,7 +66,7 @@ fun ChatListScreen(
             contentPadding = padding,
             modifier = modifier.fillMaxSize()
         ) {
-            items(6) { item ->
+            items(6) { _ ->
                 Row(
                     modifier = modifier
                         .padding(all = 10.dp)

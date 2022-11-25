@@ -19,8 +19,4 @@ class MainActivity : ComponentActivity() {
         super.attachBaseContext(newBase)
         ServiceLocator.initWithContext(newBase)
     }
-
-    init {
-
-    }
 }

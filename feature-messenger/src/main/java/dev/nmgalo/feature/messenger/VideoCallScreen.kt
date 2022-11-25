@@ -1,5 +1,6 @@
 package dev.nmgalo.feature.messenger
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +20,9 @@ import androidx.compose.material.icons.filled.VideocamOff
 import androidx.compose.material.icons.filled.VolumeOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,14 +31,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import dev.nmgalo.core.ui.withAlpha
+import dev.nmgalo.feature.messenger.rtc.WebRTCSessionState
 import org.webrtc.SurfaceViewRenderer
 
 @Composable
-fun GroupCallScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun GroupCallScreen(navController: NavController) {
 
-    val webRtcSessionManager = ServiceLocator.webRtcSessionManager
-    webRtcSessionManager.onSessionScreenReady()
+    val rtcSessionState = ServiceLocator.signalingClient.sessionStateFlow.collectAsState()
+    when (rtcSessionState.value) {
+        WebRTCSessionState.Active -> ActiveChat(navController)
+        WebRTCSessionState.Creating -> Text("Loading...")
+        WebRTCSessionState.Ready -> Text("Ready")
+        WebRTCSessionState.Impossible -> Text("Unpossible")
+        WebRTCSessionState.Offline -> Text("Offline, sorry")
+    }
+}
 
+@SuppressLint("InflateParams")
+@Composable
+fun ActiveChat(navController: NavController, modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .background(Color.Gray)
