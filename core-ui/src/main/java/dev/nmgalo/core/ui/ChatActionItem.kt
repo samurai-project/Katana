@@ -19,7 +19,7 @@ fun ChatActionItem(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     background: Color = Color.Gray,
-    onClick: () -> Unit
+    onClick: () -> Unit = {}
 ) {
     IconButton(
         modifier = modifier

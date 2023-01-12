@@ -8,13 +8,19 @@ import java.util.concurrent.Executors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.webrtc.*
+import org.webrtc.Camera2Enumerator
+import org.webrtc.EglBase
+import org.webrtc.IceCandidate
+import org.webrtc.MediaConstraints
 import org.webrtc.MediaStreamTrack.VIDEO_TRACK_KIND
+import org.webrtc.PeerConnection
+import org.webrtc.SessionDescription
+import org.webrtc.SurfaceTextureHelper
+import org.webrtc.VideoCapturer
+import org.webrtc.VideoTrack
 
 private const val VIDEO_WIDTH = 320
 private const val VIDEO_HEIGHT = 240
@@ -175,7 +181,11 @@ class WebRtcSessionManager(
                 onIceCandidateCallback = { iceCandidate ->
                     signalingClient.sendCommand(
                         SignalingCommand.ICE,
-                        "${iceCandidate.sdpMid}$ICE_SEPARATOR${iceCandidate.sdpMLineIndex}$ICE_SEPARATOR${iceCandidate.sdp}"
+                        iceCandidate.sdpMid +
+                                "$ICE_SEPARATOR" +
+                                "${iceCandidate.sdpMLineIndex}" +
+                                "$ICE_SEPARATOR" +
+                                iceCandidate.sdp
                     )
                 },
                 onTrackCallback = { rtpTransceiver ->

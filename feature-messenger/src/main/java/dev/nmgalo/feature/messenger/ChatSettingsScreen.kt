@@ -32,7 +32,7 @@ fun ChatSettingsScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    var checked = remember { mutableStateOf(false) }
+    val checked = remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {

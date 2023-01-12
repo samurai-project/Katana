@@ -75,9 +75,9 @@ fun ActiveChat(navController: NavController, modifier: Modifier = Modifier) {
                     .background(Color.Black.withAlpha(alpha = 0.2f)),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                ChatActionItem(imageVector = Icons.Filled.VideocamOff) {}
-                ChatActionItem(imageVector = Icons.Filled.VolumeOff) {}
-                ChatActionItem(imageVector = Icons.Filled.PersonAdd) {}
+                ChatActionItem(imageVector = Icons.Filled.VideocamOff)
+                ChatActionItem(imageVector = Icons.Filled.VolumeOff)
+                ChatActionItem(imageVector = Icons.Filled.PersonAdd)
                 ChatActionItem(imageVector = Icons.Filled.PhoneDisabled, background = Color.Red) {
                     navController.popBackStack()
                 }

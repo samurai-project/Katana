@@ -10,6 +10,7 @@ import org.webrtc.RtpTransceiver
  * [PeerConnection.Observer] implementation with default callbacks and ability to override them
  * NOTE: This class is not mandatory but simplifies work with WebRTC.
  */
+@Suppress("TooManyFunctions", "EmptyFunctionBlock")
 class PeerConnectionObserver(
     private val onIceCandidateCallback: (IceCandidate) -> Unit = {},
     private val onTrackCallback: (RtpTransceiver?) -> Unit = {}
