@@ -3,7 +3,7 @@ plugins {
 }
 
 apply {
-    from("$rootDir/git-hooks.gradle.kts")
+    from("git-hooks.gradle.kts")
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
