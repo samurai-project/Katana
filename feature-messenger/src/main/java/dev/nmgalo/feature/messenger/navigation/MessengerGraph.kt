@@ -1,6 +1,5 @@
 package dev.nmgalo.feature.messenger.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -12,22 +11,22 @@ import dev.nmgalo.feature.messenger.ChatSettingsScreen
 import dev.nmgalo.feature.messenger.p2p.GroupCallScreen
 
 
-fun NavGraphBuilder.messengerGraph(navController: NavController) {
+fun NavGraphBuilder.messengerGraph() {
     navigation(startDestination = "list", route = "messenger") {
         composable("list") {
-            ChatListScreen(navController = navController)
+            ChatListScreen()
         }
         composable("settings") {
-            ChatSettingsScreen(navController = navController)
+            ChatSettingsScreen()
         }
         composable(
             route = "chat/{chatId}",
             arguments = listOf(navArgument("chatId") { type = NavType.LongType })
         ) {
-            ChatScreen(navController = navController)
+            ChatScreen()
         }
         composable("group-call/{peerId}") {
-            GroupCallScreen(navController = navController)
+            GroupCallScreen()
         }
     }
 }

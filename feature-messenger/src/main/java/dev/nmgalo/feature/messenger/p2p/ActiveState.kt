@@ -19,7 +19,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.navigation.NavController
 import dev.nmgalo.core.ui.ChatActionItem
 import dev.nmgalo.core.ui.withAlpha
 import dev.nmgalo.feature.messenger.R
@@ -27,7 +26,7 @@ import dev.nmgalo.feature.messenger.databinding.WebrtcSurfaceViewRendererBinding
 
 @SuppressLint("InflateParams")
 @Composable
-fun ActiveChat(navController: NavController, modifier: Modifier = Modifier) {
+fun ActiveChat(modifier: Modifier = Modifier) {
 
     val webRtcSessionManager = ServiceLocator.webRtcSessionManager
 
@@ -79,7 +78,6 @@ fun ActiveChat(navController: NavController, modifier: Modifier = Modifier) {
                 ChatActionItem(imageVector = Icons.Filled.VolumeOff)
                 ChatActionItem(imageVector = Icons.Filled.PersonAdd)
                 ChatActionItem(imageVector = Icons.Filled.PhoneDisabled, background = Color.Red) {
-                    navController.popBackStack()
                 }
             }
         }
