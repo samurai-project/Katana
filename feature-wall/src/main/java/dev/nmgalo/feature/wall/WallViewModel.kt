@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.nmgalo.core.data.wall.WallRepository
+import dev.nmgalo.core.ui.STOP_TIMEOUT_MILLIS
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,8 +29,4 @@ class WallViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
             initialValue = WallUiState.Loading
         )
-
-    companion object {
-        const val STOP_TIMEOUT_MILLIS: Long = 5_000
-    }
 }
