@@ -17,7 +17,14 @@ class WallRepositoryImpl @Inject constructor(
 ) : WallRepository {
 
     override fun getWall(): Flow<List<Wall>> = flow {
-        emit(network.getWall())
+        emit(
+            network.getWall().map {
+                Wall(
+                    id = it.id,
+                    title = it.title
+                )
+            }
+        )
     }.flowOn(io)
 
 }

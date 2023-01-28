@@ -61,6 +61,7 @@ android {
 dependencies {
     implementation(project(":feature-wall"))
     implementation(project(":feature-messenger"))
+    implementation(project(":feature-profile"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

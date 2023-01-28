@@ -23,6 +23,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Katana"
 include(":app")
+include(":benchmark")
 include(":core-data")
 include(":core-network")
 include(":core-model")
@@ -30,4 +31,4 @@ include(":core-common")
 include(":core-ui")
 include(":feature-wall")
 include(":feature-messenger")
-include(":benchmark")
+include(":feature-profile")

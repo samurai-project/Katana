@@ -3,9 +3,9 @@ package dev.nmgalo.katana.ui
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Sms
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.SupervisedUserCircle
+import androidx.compose.material.icons.filled.VerifiedUser
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.nmgalo.feature.messenger.navigation.messengerGraph
 import dev.nmgalo.feature.wall.navigation.wallGraph
 import dev.nmgalo.katana.ui.theme.KatanaTheme
+import dev.nmgalo.profile.navigation.profileGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -33,17 +34,12 @@ fun KatanaApp() {
             topBar = {
                 SmallTopAppBar(title = { Text("Wall") }, actions = {
                     IconButton(onClick = {
-                        navController.navigate("messenger")
+                        navController.navigate("profile")
                     }) {
-                        BadgedBox(badge = {
-                            Badge {
-                                Text(text = "3", color = Color.White)
-                            }
-                        }) {
-                            Icon(
-                                imageVector = Icons.Filled.Sms, contentDescription = "Chat"
-                            )
-                        }
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Profile"
+                        )
                     }
                 })
             },
@@ -54,6 +50,7 @@ fun KatanaApp() {
                 NavHost(navController = navController, startDestination = "wall") {
                     wallGraph()
                     messengerGraph()
+                    profileGraph()
                 }
             }
         }

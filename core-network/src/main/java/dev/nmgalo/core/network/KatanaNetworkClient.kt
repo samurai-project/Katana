@@ -1,7 +1,8 @@
 package dev.nmgalo.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import dev.nmgalo.core.model.wall.Wall
+import dev.nmgalo.core.network.model.users.UserDTO
+import dev.nmgalo.core.network.model.wall.WallDTO
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -13,7 +14,6 @@ import javax.inject.Singleton
 
 @Singleton
 class KatanaNetworkClient @Inject constructor(json: Json) : KatanaNetworkDataSource {
-
 
     @OptIn(ExperimentalSerializationApi::class)
     private val networkApi = Retrofit.Builder()
@@ -31,6 +31,10 @@ class KatanaNetworkClient @Inject constructor(json: Json) : KatanaNetworkDataSou
         .build()
         .create(KatanaNetworkApi::class.java)
 
-    override suspend fun getWall(): List<Wall> =
-        networkApi.getWall().map { Wall(id = it.id, title = it.title) }
+    override suspend fun getWall(): List<WallDTO> =
+        networkApi.getWall()
+
+    override suspend fun getUserById(userId: Long): UserDTO = networkApi.getUserById(userId)
+
+    override suspend fun getAllUser(): List<UserDTO> = networkApi.getAllUser()
 }
