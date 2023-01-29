@@ -28,5 +28,9 @@ gradlePlugin {
             id = "katana.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidTest") {
+            id = "katana.android.test"
+            implementationClass = "AndroidTestConventionPlugin"
+        }
     }
 }

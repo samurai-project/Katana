@@ -1,25 +1,11 @@
 plugins {
-    id("com.android.test")
-    id("org.jetbrains.kotlin.android")
+    id("katana.android.test")
 }
 
 android {
     namespace = "dev.nmgalo.benchmark"
-    compileSdk = 33
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -47,8 +33,6 @@ dependencies {
     implementation(libs.androidx.test.rules)
     implementation(libs.androidx.test.uiautomator)
     implementation(libs.androidx.benchmark.macro)
-
-    implementation("androidx.profileinstaller:profileinstaller:1.3.0-alpha03")
 }
 
 androidComponents {
