@@ -14,18 +14,11 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             pluginManager.apply {
-                apply("com.android.library")
+                apply("katana.android.library")
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.kapt")
             }
             extensions.configure<LibraryExtension> {
-                compileSdk = AppConfig.COMPILE_SDK
-
-                defaultConfig {
-                    minSdk = AppConfig.MIN_SDK
-                    targetSdk = AppConfig.TARGET_SDK
-                }
-
                 composeOptions {
                     kotlinCompilerExtensionVersion =
                         libs.findVersion("androidxComposeCompiler").get().toString()
