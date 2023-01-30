@@ -15,6 +15,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -26,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.nmgalo.feature.messenger.navigation.messengerGraph
 import dev.nmgalo.feature.wall.navigation.wallGraph
 import dev.nmgalo.katana.R
-import dev.nmgalo.katana.ui.theme.KatanaTheme
+import dev.nmgalo.katana.ui.theme.KatanaBackground
 import dev.nmgalo.profile.navigation.profileGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +37,7 @@ fun KatanaApp() {
 
     val navController = rememberNavController()
 
-    KatanaTheme {
+    KatanaBackground {
         Scaffold(
             topBar = {
                 TopAppBar(title = { Text(stringResource(id = R.string.app_name)) }, actions = {
@@ -70,7 +72,10 @@ fun KatanaApp() {
 
 @Composable
 fun KatanaBottomNav(onNavigation: (String) -> Unit) {
-    NavigationBar(modifier = Modifier.height(70.dp)) {
+
+    val selectedIndex = remember { mutableStateOf(0) }
+
+    NavigationBar(modifier = Modifier.height(80.dp)) {
         NavigationBarItem(
             icon = {
                 Icon(
@@ -80,8 +85,11 @@ fun KatanaBottomNav(onNavigation: (String) -> Unit) {
                 )
             },
             label = { Text(stringResource(id = R.string.wall)) },
-            selected = false,
-            onClick = { onNavigation("wall") }
+            selected = selectedIndex.value == 0,
+            onClick = {
+                selectedIndex.value = 0
+                onNavigation("wall")
+            }
         )
         NavigationBarItem(
             icon = {
@@ -92,8 +100,11 @@ fun KatanaBottomNav(onNavigation: (String) -> Unit) {
                 )
             },
             label = { Text(stringResource(id = R.string.account)) },
-            selected = false,
-            onClick = { onNavigation("profile") }
+            selected = selectedIndex.value == 1,
+            onClick = {
+                selectedIndex.value = 1
+                onNavigation("profile")
+            }
         )
     }
 }

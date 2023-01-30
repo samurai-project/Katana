@@ -7,6 +7,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import dev.nmgalo.katana.ui.composition.BackgroundTheme
+import dev.nmgalo.katana.ui.composition.LocalBackgroundTheme
 
 
 private val DarkThemeColors = darkColorScheme(
@@ -33,9 +35,14 @@ fun KatanaTheme(
     content: @Composable () -> Unit
 ) {
 
-    CompositionLocalProvider {
+    val colorScheme = if (darkTheme) DarkThemeColors else LightThemeColors
+    val backgroundTheme = BackgroundTheme(color = colorScheme.surface)
+
+    CompositionLocalProvider(
+        LocalBackgroundTheme provides backgroundTheme
+    ) {
         MaterialTheme(
-            colorScheme = if (darkTheme) DarkThemeColors else LightThemeColors,
+            colorScheme = colorScheme,
             typography = KatanaTypography,
             content = content
         )
