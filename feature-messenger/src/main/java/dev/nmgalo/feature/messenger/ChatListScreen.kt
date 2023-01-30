@@ -27,6 +27,7 @@ import coil.compose.AsyncImage
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ChatListScreen(
+    onItemClick: (route: String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -42,6 +43,8 @@ fun ChatListScreen(
                             TODO("Later !!!")
                         },
                         onClick = {
+                            val mockChatId = 1L
+                            onItemClick("chat/$mockChatId")
                         }
                     ),
                 verticalAlignment = Alignment.CenterVertically

@@ -11,10 +11,10 @@ import dev.nmgalo.feature.messenger.ChatSettingsScreen
 import dev.nmgalo.feature.messenger.p2p.GroupCallScreen
 
 
-fun NavGraphBuilder.messengerGraph() {
+fun NavGraphBuilder.messengerGraph(onNavigation: (route: String) -> Unit) {
     navigation(startDestination = "list", route = "messenger") {
         composable("list") {
-            ChatListScreen()
+            ChatListScreen(onNavigation::invoke)
         }
         composable("settings") {
             ChatSettingsScreen()
