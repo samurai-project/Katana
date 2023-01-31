@@ -75,7 +75,7 @@ fun KatanaBottomNav(onNavigation: (String) -> Unit) {
 
     val selectedIndex = remember { mutableStateOf(0) }
 
-    NavigationBar(modifier = Modifier.height(80.dp)) {
+    NavigationBar {
         NavigationBarItem(
             icon = {
                 Icon(
