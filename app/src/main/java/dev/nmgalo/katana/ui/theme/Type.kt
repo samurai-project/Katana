@@ -8,13 +8,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.nmgalo.katana.R
 
-private val Montserrat = FontFamily(
+private val Sora = FontFamily(
     Font(R.font.sora_regular),
     Font(R.font.sora_medium, FontWeight.W500)
 )
 
 private val defaultTextStyle = TextStyle(
-    fontFamily = Montserrat
+    fontFamily = Sora
 )
 
 val KatanaTypography = Typography(
