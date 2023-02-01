@@ -26,9 +26,13 @@ class AppStartupBenchmark {
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
         startupMode = StartupMode.COLD,
-        compilationMode = mode
-    ) {
-        pressHome()
-        startActivityAndWait()
-    }
+        compilationMode = mode,
+        setupBlock = {
+            killProcess()
+            pressHome()
+        },
+        measureBlock = {
+            startActivityAndWait()
+        }
+    )
 }

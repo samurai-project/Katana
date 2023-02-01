@@ -30,9 +30,11 @@ android {
             )
         }
         val benchmark by creating {
+            initWith(release)
             signingConfig = signingConfigs.getByName("debug")
-            matchingFallbacks += listOf("release")
+            matchingFallbacks.add("release")
             isDebuggable = false
+            proguardFiles("benchmark-rules.pro")
         }
     }
     compileOptions {
