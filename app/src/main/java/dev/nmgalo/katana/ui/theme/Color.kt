@@ -1,4 +1,4 @@
-@file:Suppress("TopLevelPropertyNaming")
+@file:Suppress("TopLevelPropertyNaming") // Rome once https://github.com/SamuraiProject/Katana/issues/2 is fixed
 
 package dev.nmgalo.katana.ui.theme
 
