@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="create_post_label">What’s on your mind?</string>
+    <string name="comments_count">%1$d comments</string>
 </resources>

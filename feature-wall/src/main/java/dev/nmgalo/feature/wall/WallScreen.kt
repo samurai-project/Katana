@@ -1,6 +1,8 @@
 package dev.nmgalo.feature.wall
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,6 +19,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +29,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -73,7 +79,7 @@ fun CreatePost() {
             .fillMaxWidth()
             .height(100.dp)
             .padding(all = 10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         border = BorderStroke(1.dp, Color.Black),
         shape = RoundedCornerShape(
             topStartPercent = 0,
@@ -97,30 +103,57 @@ fun WallItem(modifier: Modifier = Modifier, item: Wall) {
     Column(
         modifier = modifier
             .padding(all = 10.dp)
+            .border(1.dp, MaterialTheme.colorScheme.outline)
             .fillMaxWidth(),
     ) {
+        WallItemHeader()
         AsyncImage(
             model = "https://loremflickr.com/536/319",
             contentScale = ContentScale.Crop,
             contentDescription = item.title,
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp)
         )
-        Row(
-            modifier = modifier
-                .padding(vertical = 5.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
+        WallItemActions()
+    }
+}
+
+@Composable
+fun WallItemHeader() {
+
+}
+
+@Composable
+fun WallItemActions() {
+    Row(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row {
+            Icon(
+                painterResource(R.drawable.ic_heart),
+                "Favorite",
+                modifier = Modifier.clickable {
+                    TODO("Not yet implemented")
+                }
+            )
+        }
+        Row {
+            Text(
+                text = stringResource(R.string.comments_count, 2),
+                style = MaterialTheme.typography.labelMedium,
+            )
         }
     }
 }
 
-
 @MobileFullPreview
 @Composable
 fun Preview() {
-    CreatePost()
+    WallItemActions()
 }
 
