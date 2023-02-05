@@ -11,10 +11,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -35,7 +40,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.nmgalo.core.model.wall.Wall
-import dev.nmgalo.core.ui.MobileFullPreview
 
 @Composable
 fun WallScreen(
@@ -61,7 +65,11 @@ fun Loader(modifier: Modifier = Modifier) {
 
 @Composable
 fun ChatList(modifier: Modifier = Modifier, wall: List<Wall>) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 10.dp)
+    ) {
         item {
             CreatePost()
         }
@@ -77,8 +85,7 @@ fun CreatePost() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
-            .padding(all = 10.dp),
+            .height(100.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         border = BorderStroke(1.dp, Color.Black),
         shape = RoundedCornerShape(
@@ -102,7 +109,7 @@ fun CreatePost() {
 fun WallItem(modifier: Modifier = Modifier, item: Wall) {
     Column(
         modifier = modifier
-            .padding(all = 10.dp)
+            .padding(vertical = 10.dp)
             .border(1.dp, MaterialTheme.colorScheme.outline)
             .fillMaxWidth(),
     ) {
@@ -120,8 +127,27 @@ fun WallItem(modifier: Modifier = Modifier, item: Wall) {
 }
 
 @Composable
-fun WallItemHeader() {
-
+fun WallItemHeader(modifier: Modifier = Modifier) {
+    Column(modifier = modifier.padding(16.dp)) {
+        Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Row {
+                AsyncImage(
+                    model = "https://loremflickr.com/536/536",
+                    contentDescription = "User profile image",
+                    modifier = modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .border(.5.dp, Color.Black)
+                )
+            }
+            Row {
+                Icon(Icons.Filled.MoreHoriz, "More", modifier = modifier.clickable { })
+            }
+        }
+        Row(modifier = modifier.padding(top = 32.dp, bottom = 14.dp)) {
+            Text("A great day when you are confident in yourself!")
+        }
+    }
 }
 
 @Composable
@@ -150,10 +176,3 @@ fun WallItemActions() {
         }
     }
 }
-
-@MobileFullPreview
-@Composable
-fun Preview() {
-    WallItemActions()
-}
-

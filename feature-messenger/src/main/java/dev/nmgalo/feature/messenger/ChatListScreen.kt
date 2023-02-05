@@ -36,7 +36,7 @@ fun ChatListScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        items(6) {
+        items(count = 6) {
             ConversationItem(onItemClick::invoke)
         }
     }
