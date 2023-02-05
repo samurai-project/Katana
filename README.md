@@ -52,6 +52,20 @@ data layer at the bottom, the key concepts are:
 Modularization is the practice of breaking the concept of a monolithic, one-module codebase into
 loosely coupled, self contained modules.
 
+### Gradle plugin for modules
+
+We use convention plugins in Katana application.
+
+This approach is heavily based on [https://developer.squareup.com/blog/herding-elephants/](https://developer.squareup.com/blog/herding-elephants/)
+
+By setting up convention plugins in `build-logic`, we can avoid duplicated build script setup, messy subproject configurations, without the pitfalls of the buildSrc directory.
+
+Current list of convention plugins:
+- [`katana.android.application`](build-logic/convention/src/main/kotlin/AndroidApplicationConventionPlugin.kt),
+- [`katana.android.feature`](build-logic/convention/src/main/kotlin/AndroidFeatureConventionPlugin.kt),
+- [`katana.android.library`](build-logic/convention/src/main/kotlin/AndroidLibraryConventionPlugin.kt),
+- [`katana.android.test`](build-logic/convention/src/main/kotlin/AndroidTestConventionPlugin.kt)
+
 ### Benefits of modularization
 
 This offers many benefits, including:
