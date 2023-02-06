@@ -1,4 +1,4 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO Remove once KTIJ-19369 is fixed
+@Suppress("DSL_SCOPE_VIOLATION") // TODO Remove once https://github.com/gradle/gradle/issues/22797 is fixed
 
 plugins {
     alias(libs.plugins.detekt)
