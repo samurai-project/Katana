@@ -1,5 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO Remove once KTIJ-19369 is fixed
+
 plugins {
-    id("io.gitlab.arturbosch.detekt") version "1.21.0"
+    alias(libs.plugins.detekt)
 }
 
 apply {

@@ -18,6 +18,7 @@ androidxTestRunner = "1.5.2"
 androidxUiAutomator = "2.2.0"
 coil = "2.2.2"
 constraintlayout = "2.1.4"
+detekt = "1.21.0"
 hilt = "2.44.2"
 junit = "4.13.2"
 kotlin = "1.7.21"
@@ -69,3 +70,6 @@ material3 = { group = "com.google.android.material", name = "material", version.
 okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
