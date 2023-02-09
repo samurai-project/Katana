@@ -1,4 +1,4 @@
-package dev.nmgalo.datastore.di
+package dev.nmgalo.core.datastore.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -11,8 +11,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.nmgalo.core.common.Dispatcher
 import dev.nmgalo.core.common.KatanaDispatchers
-import dev.nmgalo.core.datastore.UserPreferencesOuterClass.UserPreferences
-import dev.nmgalo.datastore.UserPreferencesSerializer
+import dev.nmgalo.core.datastore.UserPreferences
+import dev.nmgalo.core.datastore.UserPreferencesSerializer
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob

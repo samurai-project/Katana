@@ -1,7 +1,6 @@
-package dev.nmgalo.datastore
+package dev.nmgalo.core.datastore
 
 import androidx.datastore.core.DataStore
-import dev.nmgalo.core.datastore.UserPreferencesOuterClass.UserPreferences
 import dev.nmgalo.core.model.data.UserData
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -11,7 +10,8 @@ class KatanaPreferencesDataSource @Inject constructor(
 ) {
     val userData = userPreferences.data.map {
         UserData(
-            isDarkModeEnabled = it.isDarkModeEnabled
+            isDarkModeEnabled = it.isDarkModeEnabled,
+            shouldShowOnboardingScreen = it.shouldShowOnboardingScreen
         )
     }
 }

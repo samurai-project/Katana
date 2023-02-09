@@ -25,9 +25,6 @@ protobuf {
                 val java by registering {
                     option("lite")
                 }
-                val kotlin by registering {
-                    option("lite")
-                }
             }
         }
     }

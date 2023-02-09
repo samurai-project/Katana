@@ -1,9 +1,8 @@
-package dev.nmgalo.datastore
+package dev.nmgalo.core.datastore
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import com.google.protobuf.InvalidProtocolBufferException
-import dev.nmgalo.core.datastore.UserPreferencesOuterClass.UserPreferences
 import java.io.InputStream
 import java.io.OutputStream
 import javax.inject.Inject
