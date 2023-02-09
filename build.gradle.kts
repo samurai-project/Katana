@@ -9,6 +9,7 @@ apply {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    exclude("**/build/**")
     reports {
         html.required.set(true)
         xml.required.set(true)
