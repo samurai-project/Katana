@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option java_package = "dev.nmgalo.core.datastore";
+
+message UserPreferences {
+  bool is_dark_mode_enabled = 1;
+}
