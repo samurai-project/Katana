@@ -14,4 +14,20 @@ class KatanaPreferencesDataSource @Inject constructor(
             shouldShowOnboardingScreen = it.shouldShowOnboardingScreen
         )
     }
+
+    suspend fun setDarkMode(shouldUseDarkMode: Boolean) {
+        userPreferences.updateData {
+            it.copy {
+                this.isDarkModeEnabled = shouldUseDarkMode
+            }
+        }
+    }
+
+    suspend fun setShouldShowOnboardingScreen(shouldShowOnboarding: Boolean) {
+        userPreferences.updateData {
+            it.copy {
+                this.shouldShowOnboardingScreen = shouldShowOnboarding
+            }
+        }
+    }
 }

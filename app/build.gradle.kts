@@ -65,6 +65,11 @@ dependencies {
     implementation(project(":feature-messenger"))
     implementation(project(":feature-profile"))
 
+    implementation(project(":core-common"))
+    implementation(project(":core-ui"))
+    implementation(project(":core-data"))
+    implementation(project(":core-model"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)

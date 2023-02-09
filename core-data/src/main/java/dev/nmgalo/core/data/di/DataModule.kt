@@ -6,6 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.nmgalo.core.data.user.UserRepository
 import dev.nmgalo.core.data.user.UserRepositoryImpl
+import dev.nmgalo.core.data.userdata.OnDeviceUserDataRepository
+import dev.nmgalo.core.data.userdata.UserDataRepository
 import dev.nmgalo.core.data.wall.WallRepository
 import dev.nmgalo.core.data.wall.WallRepositoryImpl
 
@@ -18,4 +20,7 @@ interface DataModule {
 
     @Binds
     fun bindsUserRepository(userRepository: UserRepositoryImpl): UserRepository
+
+    @Binds
+    fun bindsUserDataRepository(userDataRepository: OnDeviceUserDataRepository): UserDataRepository
 }
