@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,18 +31,30 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import dev.nmgalo.core.model.user.User
 import dev.nmgalo.feature.profile.R
 
 @Composable
-fun PersonalProfileScreen() {
+fun PersonalProfileScreen(
+    viewModel: ProfileViewModel = hiltViewModel()
+) {
+    val state = viewModel.user.collectAsState()
     Column {
-        UserProfileInfo()
+        when (val profileState = state.value) {
+            ProfileUiState.Loading -> Text("TODO implement custom loader later")
+            ProfileUiState.Error -> TODO("An error occurred")
+            is ProfileUiState.Success -> UserProfileInfo(profileState.profile)
+        }
     }
 }
 
 @Composable
-fun UserProfileInfo(modifier: Modifier = Modifier) {
+fun UserProfileInfo(
+    user: User,
+    modifier: Modifier = Modifier
+) {
     AsyncImage(
         modifier = modifier
             .fillMaxWidth()
@@ -56,7 +69,7 @@ fun UserProfileInfo(modifier: Modifier = Modifier) {
             .offset(y = -60.dp)
     ) {
         UserProfile()
-        UserName()
+        UserName(user.username)
         FollowersAndFollowingCount()
     }
 }
@@ -75,7 +88,7 @@ fun UserProfile() {
 }
 
 @Composable
-fun UserName(modifier: Modifier = Modifier) {
+fun UserName(userName: String, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .padding(top = 10.dp)
@@ -84,7 +97,7 @@ fun UserName(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Nika Mgaloblishvili",
+            text = userName,
             style = MaterialTheme.typography.headlineSmall,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,

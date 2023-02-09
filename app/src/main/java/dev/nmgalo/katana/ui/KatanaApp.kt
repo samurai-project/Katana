@@ -15,19 +15,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dev.nmgalo.feature.messenger.navigation.messengerGraph
 import dev.nmgalo.feature.wall.navigation.wallGraph
 import dev.nmgalo.katana.R
+import dev.nmgalo.katana.ui.navigation.Screen
 import dev.nmgalo.katana.ui.theme.KatanaBackground
 import dev.nmgalo.profile.navigation.profileGraph
 
@@ -54,13 +56,13 @@ fun KatanaApp() {
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
-                KatanaBottomNav { destination ->
+                KatanaBottomNav(navController) { destination ->
                     navController.navigate(destination)
                 }
             }
         ) { padding ->
             Row(modifier = Modifier.padding(padding)) {
-                NavHost(navController = navController, startDestination = "wall") {
+                NavHost(navController = navController, startDestination = Screen.Wall.route) {
                     wallGraph()
                     messengerGraph { navController.navigate(it) }
                     profileGraph()
@@ -71,46 +73,27 @@ fun KatanaApp() {
 }
 
 @Composable
-fun KatanaBottomNav(onNavigation: (String) -> Unit) {
+fun KatanaBottomNav(navController: NavController, onNavigation: (String) -> Unit) {
 
-    val selectedIndex = remember { mutableStateOf(0) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     NavigationBar {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_wall),
-                    modifier = Modifier.height(25.dp),
-                    contentDescription = ""
-                )
-            },
-            label = { Text(stringResource(id = R.string.wall)) },
-            selected = selectedIndex.value == 0,
-            onClick = {
-                selectedIndex.value = 0
-                onNavigation("wall")
-            }
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_account),
-                    modifier = Modifier.height(25.dp),
-                    contentDescription = ""
-                )
-            },
-            label = { Text(stringResource(id = R.string.account)) },
-            selected = selectedIndex.value == 1,
-            onClick = {
-                selectedIndex.value = 1
-                onNavigation("profile")
-            }
-        )
+        Screen.values().forEach { screen ->
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        painter = painterResource(id = screen.icon),
+                        modifier = Modifier.height(25.dp),
+                        contentDescription = screen.name
+                    )
+                },
+                label = { Text(stringResource(id = screen.title)) },
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                onClick = {
+                    onNavigation(screen.route)
+                }
+            )
+        }
     }
-}
-
-@Preview
-@Composable
-fun Preview() {
-    KatanaBottomNav {}
 }
