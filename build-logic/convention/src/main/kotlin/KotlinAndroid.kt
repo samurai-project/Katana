@@ -26,6 +26,12 @@ internal fun Project.configureKotlinAndroid(
             targetCompatibility = JavaVersion.VERSION_1_8
             isCoreLibraryDesugaringEnabled = true
         }
+
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            )
+        }
     }
 
     val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
