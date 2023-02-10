@@ -10,21 +10,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     userDataRepository: UserDataRepository
 ) : ViewModel() {
-
-    init {
-        // TODO Only for testing on physical devices, remove later
-        viewModelScope.launch {
-            userDataRepository.setShouldShowOnBoarding(true)
-            userDataRepository.setDarkModeEnabled(false)
-        }
-    }
 
     val uiState: StateFlow<UserDataState> = userDataRepository.userData.flatMapLatest {
         flowOf(UserDataState.Success(it))
