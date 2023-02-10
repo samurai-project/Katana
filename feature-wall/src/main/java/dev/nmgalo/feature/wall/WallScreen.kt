@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -86,8 +87,8 @@ fun CreatePost() {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
-        border = BorderStroke(1.dp, Color.Black),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.inverseOnSurface),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         shape = RoundedCornerShape(
             topStartPercent = 0,
             topEndPercent = 40,
@@ -97,6 +98,9 @@ fun CreatePost() {
     ) {
         BasicTextField(
             value = inputData.value,
+            textStyle = TextStyle(
+                color = MaterialTheme.colorScheme.onSurface
+            ),
             onValueChange = { inputData.value = it },
             modifier = Modifier
                 .padding(10.dp)
