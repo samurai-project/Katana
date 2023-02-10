@@ -6,5 +6,6 @@ import dev.nmgalo.katana.R
 
 enum class Screen(val route: String, @StringRes val title: Int, @DrawableRes val icon: Int) {
     Wall("wall", R.string.wall, R.drawable.ic_wall),
-    Profile("profile", R.string.profile, R.drawable.ic_account)
+    Profile("profile", R.string.profile, R.drawable.ic_account),
+    Settings("settings", R.string.profile, R.drawable.ic_account)
 }
