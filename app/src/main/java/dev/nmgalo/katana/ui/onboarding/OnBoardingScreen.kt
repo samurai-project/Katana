@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowRightAlt
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -113,12 +114,16 @@ fun OnBoardingControls(
                 .size(100.dp)
                 .clip(CircleShape)
                 .align(Alignment.Bottom),
+            colors = ButtonDefaults.outlinedButtonColors(
+                contentColor = MaterialTheme.colorScheme.onBackground
+            ),
             onClick = {
                 if (isLastItem) onSkip.invoke() else onNext.invoke()
             }
         ) {
-            if (isLastItem) Icon(Icons.Filled.Close, "Close")
-            else Icon(Icons.Filled.ArrowRightAlt, "Next")
+            val iconModifier = modifier.fillMaxSize(fraction = 0.75F)
+            if (isLastItem) Icon(Icons.Filled.Close, "Close", modifier = iconModifier)
+            else Icon(Icons.Filled.ArrowRightAlt, "Next", modifier = iconModifier)
         }
     }
 }
