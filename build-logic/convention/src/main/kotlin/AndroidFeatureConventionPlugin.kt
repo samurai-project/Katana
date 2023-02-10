@@ -50,6 +50,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("debugImplementation", libs.findLibrary("androidx.customview.poolingcontainer").get())
                 add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
 
+
                 add(
                     "implementation",
                     libs.findLibrary("androidx.lifecycle.viewModelCompose").get()

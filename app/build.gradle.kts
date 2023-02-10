@@ -76,8 +76,12 @@ dependencies {
     implementation(libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.customview.poolingcontainer)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.profile.installer)
+
+    implementation(libs.accompanist.pager)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

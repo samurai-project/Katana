@@ -19,8 +19,10 @@ class MainActivityViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
+        // TODO Only for testing on physical devices, remove later
         viewModelScope.launch {
-            userDataRepository.setDarkModeEnabled(true)
+            userDataRepository.setShouldShowOnBoarding(true)
+            userDataRepository.setDarkModeEnabled(false)
         }
     }
 

@@ -14,4 +14,9 @@ interface UserDataRepository {
      * Set if dark mode is available or not.
      **/
     suspend fun setDarkModeEnabled(darkModeEnabled: Boolean)
+
+    /**
+     * Define, should show OnBoardingScreen to user.
+     **/
+    suspend fun setShouldShowOnBoarding(shouldShowOnBoarding: Boolean)
 }

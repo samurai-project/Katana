@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.nmgalo.feature.messenger.p2p.ServiceLocator
 import dev.nmgalo.katana.ui.KatanaApp
 import dev.nmgalo.katana.ui.composition.LocalOnFinishDispatcher
+import dev.nmgalo.katana.ui.onboarding.OnBoardingScreen
 import dev.nmgalo.katana.ui.theme.KatanaTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -43,9 +44,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val darkTheme = shouldUseDarkTheme(uiState)
+            val showOnBoardingScreen = shouldShowOnBoardingScreen(uiState)
             KatanaTheme(darkTheme = darkTheme) {
                 CompositionLocalProvider(LocalOnFinishDispatcher provides { finish() }) {
-                    KatanaApp()
+                    if (showOnBoardingScreen) OnBoardingScreen() else KatanaApp()
                 }
             }
         }
@@ -62,5 +64,13 @@ private fun shouldUseDarkTheme(uiState: UserDataState): Boolean {
     return when (uiState) {
         UserDataState.Loading -> isSystemInDarkTheme()
         is UserDataState.Success -> uiState.userData.isDarkModeEnabled
+    }
+}
+
+@Composable
+fun shouldShowOnBoardingScreen(uiState: UserDataState): Boolean {
+    return when (uiState) {
+        UserDataState.Loading -> true
+        is UserDataState.Success -> uiState.userData.shouldShowOnboardingScreen
     }
 }

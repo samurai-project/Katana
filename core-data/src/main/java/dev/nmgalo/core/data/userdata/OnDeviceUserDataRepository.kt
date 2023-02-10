@@ -12,5 +12,8 @@ class OnDeviceUserDataRepository @Inject constructor(
         katanaPreferencesDataSource.userData
 
     override suspend fun setDarkModeEnabled(darkModeEnabled: Boolean) =
-        katanaPreferencesDataSource.setDarkMode(darkModeEnabled)
+        katanaPreferencesDataSource.setDarkModeEnabled(darkModeEnabled)
+
+    override suspend fun setShouldShowOnBoarding(shouldShowOnBoarding: Boolean) =
+        katanaPreferencesDataSource.setShouldShowOnboardingScreen(shouldShowOnBoarding)
 }

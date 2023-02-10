@@ -3,4 +3,9 @@
     <string name="wall">Wall</string>
     <string name="account">Account</string>
     <string name="profile">Profile</string>
+    <string name="skip">Skip</string>
+    <string name="step_number">Step 0%1$d</string>
+    <string name="onb_community">Get to know your coworkers</string>
+    <string name="onb_stay_in_touch">Reach out to anyone at anytime</string>
+    <string name="onb_personal_desk">We don\'t believe in cubicles</string>
 </resources>
