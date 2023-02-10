@@ -126,19 +126,19 @@ fun FollowersAndFollowingCount() {
         horizontalArrangement = Arrangement.End
     ) {
         Text(
-            text = formatFollowersOrFollowing(R.string.following, MOCK_FOLLOWING_COUNT),
+            text = formatConnections(R.string.following, MOCK_FOLLOWING_COUNT),
             style = MaterialTheme.typography.labelSmall
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = formatFollowersOrFollowing(R.string.followers, MOCK_FOLLOWERS_COUNT),
+            text = formatConnections(R.string.followers, MOCK_FOLLOWERS_COUNT),
             style = MaterialTheme.typography.labelSmall
         )
     }
 }
 
 @Composable
-fun formatFollowersOrFollowing(@StringRes resource: Int, count: Int) = buildAnnotatedString {
+fun formatConnections(@StringRes resource: Int, count: Int) = buildAnnotatedString {
     append("$count ")
     withStyle(style = SpanStyle(MaterialTheme.colorScheme.secondary)) {
         append(stringResource(id = resource))
