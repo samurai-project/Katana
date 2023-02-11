@@ -1,10 +1,11 @@
-@file:Suppress("UNUSED_VARIABLE", "UnstableApiUsage")
+@file:Suppress("UNUSED_VARIABLE", "UnstableApiUsage", "DSL_SCOPE_VIOLATION")
 
 plugins {
     id("katana.android.application")
     kotlin("kapt")
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -88,6 +89,7 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
