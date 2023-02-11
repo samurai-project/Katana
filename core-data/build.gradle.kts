@@ -1,6 +1,5 @@
 plugins {
     id("katana.android.library")
-    id("org.jetbrains.kotlin.android")
     kotlin("kapt")
 }
 
