@@ -3,7 +3,8 @@
 plugins {
     id("katana.android.application")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
 }
 
 android {
