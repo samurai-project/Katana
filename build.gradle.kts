@@ -1,7 +1,11 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO Remove once https://github.com/gradle/gradle/issues/22797 is fixed
 
 plugins {
-    alias(libs.plugins.detekt)
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.detekt) apply true
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 apply {
@@ -43,13 +47,5 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-    }
-
-    dependencies {
-        classpath(libs.android.gradlePlugin)
-        classpath(libs.kotlin.gradlePlugin)
-        classpath(libs.kotlin.serializationPlugin)
-        classpath(libs.hilt.gradlePlugin)
-        classpath("com.google.gms:google-services:4.3.15")
     }
 }
