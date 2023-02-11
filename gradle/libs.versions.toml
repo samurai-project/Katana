@@ -21,6 +21,8 @@ coil = "2.2.2"
 constraintlayout = "2.1.4"
 datastore = "1.0.0"
 detekt = "1.21.0"
+firebaseBom = "31.2.0"
+googleServices = "4.3.15"
 hilt = "2.44.2"
 junit = "4.13.2"
 kotlin = "1.7.21"
@@ -64,6 +66,8 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 coil-kt = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 hilt-gradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }

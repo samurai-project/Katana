@@ -8,7 +8,9 @@ import java.io.OutputStream
 import javax.inject.Inject
 
 class UserPreferencesSerializer @Inject constructor() : Serializer<UserPreferences> {
-    override val defaultValue: UserPreferences = UserPreferences.getDefaultInstance()
+    override val defaultValue: UserPreferences = UserPreferences.getDefaultInstance().copy {
+        this.shouldShowOnboardingScreen = true
+    }
 
     override suspend fun readFrom(input: InputStream): UserPreferences = try {
         UserPreferences.parseFrom(input)

@@ -50,5 +50,6 @@ buildscript {
         classpath(libs.kotlin.gradlePlugin)
         classpath(libs.kotlin.serializationPlugin)
         classpath(libs.hilt.gradlePlugin)
+        classpath("com.google.gms:google-services:4.3.15")
     }
 }
