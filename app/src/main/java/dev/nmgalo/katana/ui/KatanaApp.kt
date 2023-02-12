@@ -22,6 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -56,7 +58,13 @@ fun KatanaApp() {
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
                 KatanaBottomNav(navController) { destination ->
-                    navController.navigate(destination)
+                    navController.navigate(destination) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
                 }
             }
         ) { padding ->
@@ -88,7 +96,7 @@ fun KatanaBottomNav(navController: NavController, onNavigation: (String) -> Unit
                     )
                 },
                 label = { Text(stringResource(id = screen.title)) },
-                selected = currentDestination?.route == screen.route,
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     onNavigation(screen.route)
                 }
