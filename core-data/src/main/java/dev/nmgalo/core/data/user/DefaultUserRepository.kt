@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(
+class DefaultUserRepository @Inject constructor(
     private val network: KatanaNetworkDataSource,
     @Dispatcher(KatanaDispatchers.IO)
     private val io: CoroutineDispatcher
