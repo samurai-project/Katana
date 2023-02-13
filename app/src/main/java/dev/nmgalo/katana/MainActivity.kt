@@ -11,6 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -42,6 +43,8 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             val darkTheme = shouldUseDarkTheme(uiState)
             val showOnBoardingScreen = shouldShowOnBoardingScreen(uiState)
@@ -70,7 +73,7 @@ private fun shouldUseDarkTheme(uiState: UserDataState): Boolean {
 @Composable
 fun shouldShowOnBoardingScreen(uiState: UserDataState): Boolean {
     return when (uiState) {
-        UserDataState.Loading -> true
+        UserDataState.Loading -> false
         is UserDataState.Success -> uiState.userData.shouldShowOnboardingScreen
     }
 }

@@ -4,9 +4,10 @@ plugins {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
+    implementation(project(":core-model"))
 
-    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.room)
+    kapt(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

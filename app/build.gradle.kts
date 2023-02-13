@@ -66,6 +66,7 @@ dependencies {
     implementation(project(":feature-wall"))
     implementation(project(":feature-messenger"))
     implementation(project(":feature-profile"))
+    implementation(project(":feature-settings"))
 
     implementation(project(":core-common"))
     implementation(project(":core-ui"))
