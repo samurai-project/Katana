@@ -1,4 +1,4 @@
-package dev.nmgalo.profile
+package dev.nmgalo.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun ProfileSettingsScreen(
-    viewModel: ProfileSettingsViewModel = hiltViewModel()
+fun GeneralSettingsScreen(
+    viewModel: GeneralScreenViewModel = hiltViewModel()
 ) {
     val checked = remember { mutableStateOf(true) }
 

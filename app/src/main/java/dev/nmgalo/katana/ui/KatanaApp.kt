@@ -31,6 +31,7 @@ import dev.nmgalo.katana.R
 import dev.nmgalo.katana.ui.navigation.Screen
 import dev.nmgalo.katana.ui.theme.KatanaBackground
 import dev.nmgalo.profile.navigation.profileGraph
+import dev.nmgalo.settings.navigation.settingsGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,6 +72,7 @@ fun KatanaApp() {
                     wallGraph()
                     messengerGraph { navController.navigate(it) }
                     profileGraph()
+                    settingsGraph()
                 }
             }
         }
