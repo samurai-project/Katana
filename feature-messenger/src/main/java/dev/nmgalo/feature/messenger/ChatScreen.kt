@@ -56,13 +56,17 @@ fun ConversationMessageItem(message: Message, modifier: Modifier = Modifier) {
                 .align(if (message.isMe) Alignment.End else Alignment.Start)
                 .clip(RoundedCornerShape(20.dp))
                 .fillMaxWidth(fraction = 0.90f)
-                .background(color = if (message.isMe) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant)
+                .background(color = with(MaterialTheme.colorScheme) {
+                    if (message.isMe) primary else surfaceVariant
+                })
         ) {
             SelectionContainer {
                 Text(
                     text = message.message,
                     modifier = modifier.padding(10.dp),
-                    color = if (message.isMe) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
+                    color = with(MaterialTheme.colorScheme) {
+                        if (message.isMe) onPrimary else onSurfaceVariant
+                    }
                 )
             }
         }

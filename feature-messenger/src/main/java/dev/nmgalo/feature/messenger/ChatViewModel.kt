@@ -22,7 +22,7 @@ class ChatViewModel @Inject constructor(
     private val chatId =
         savedStateHandle.get<Long>("chatId") ?: error("argument `chatId` is required")
 
-    val conversationState = messageRepository.getConversationById(conversationId = chatId)
+    val conversationState = messageRepository.getMessagesByChatId(conversationId = chatId)
         .flatMapLatest {
             flowOf(ConversationState.Success(it.map { message ->
                 Message(

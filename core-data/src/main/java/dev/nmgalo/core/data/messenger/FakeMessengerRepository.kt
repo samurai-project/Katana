@@ -13,7 +13,9 @@ import javax.inject.Inject
 class FakeMessengerRepository @Inject constructor(
     @Dispatcher(KatanaDispatchers.IO) private val io: CoroutineDispatcher,
 ) : MessengerRepository {
-    override fun getConversationById(conversationId: Long): Flow<List<Message>> = flow {
+
+    @Suppress("LongMethod")
+    override fun getMessagesByChatId(conversationId: Long): Flow<List<Message>> = flow {
         emit(
             listOf(
                 Message(
@@ -60,28 +62,33 @@ class FakeMessengerRepository @Inject constructor(
                 ),
                 Message(
                     id = 6,
-                    message = "ხანდახან ძალიან მარტივია ტექსტის დაგრძელება, თუ რენდომ რამეებს აკფრეფ კლაიატურაზე, თანაც შემეძლება შევამოწმო გრძელ გადაბმულ სტრინგზე როგორ იქცება აპი, კარგი გზაა ისე ამის შესამოწმებლად",
+                    message = "ხანდახან ძალიან მარტივია ტექსტის დაგრძელება, თუ რენდომ რამეებს აკფრეფ " +
+                            "კლაიატურაზე, თანაც შემეძლება შევამოწმო გრძელ გადაბმულ სტრინგზე როგორ იქცება აპი," +
+                            " კარგი გზაა ისე ამის შესამოწმებლად",
                     senderId = 1,
                     status = MessageStatus.READ,
                     createdAt = 1
                 ),
                 Message(
                     id = 7,
-                    message = "დასდაკჯდასკდჯსადკაფგოსდფლასდჯფკლსდასდაკჯდასკდჯსადკაფგოსდფლასდჯფკლსდასდაკჯდასკდჯსადკაფგოსდფლასდჯფკლს",
+                    message = "დასდაკჯდასკდჯსადკაფგოსდფლასდჯფკლსდასდაკჯდასკდჯსადკაფგოსდფლასდჯფკლსდას" +
+                            "დაკჯდასკდჯსადკაფგოსდფლასდჯფკლს",
                     senderId = 2,
                     status = MessageStatus.READ,
                     createdAt = 1
                 ),
                 Message(
                     id = 8,
-                    message = "მგონი საკმარისია, ან რავი, ცოტა კიდევ დავამატოთ ჩვენ მიმოწერას, არამგონია სქროლვადი კონტენტი იყოს ჯერჯერობით, ანდაც იქნება",
+                    message = "მგონი საკმარისია, ან რავი, ცოტა კიდევ დავამატოთ ჩვენ მიმოწერას, " +
+                            "არამგონია სქროლვადი კონტენტი იყოს ჯერჯერობით, ანდაც იქნება",
                     senderId = 1,
                     status = MessageStatus.READ,
                     createdAt = 1
                 ),
                 Message(
                     id = 9,
-                    message = "ხო, საკმარისია აწი, სასიამოვნო დღეს გისყურვებ, არ დაგავიწყდეს, მცირედ დაწერილ კოდსაც დიდი ძალა აქვს <3",
+                    message = "ხო, საკმარისია აწი, სასიამოვნო დღეს გისყურვებ, არ დაგავიწყდეს, " +
+                            "მცირედ დაწერილ კოდსაც დიდი ძალა აქვს <3",
                     senderId = 2,
                     status = MessageStatus.SENT,
                     createdAt = 1
