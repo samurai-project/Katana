@@ -3,6 +3,9 @@ plugins {
 }
 
 android {
+
+    namespace = "dev.nmgalo.feature.messenger"
+
     buildFeatures {
         viewBinding = true
     }

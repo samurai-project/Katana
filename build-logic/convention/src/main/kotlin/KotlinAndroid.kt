@@ -31,6 +31,7 @@ internal fun Project.configureKotlinAndroid(
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
             )
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 

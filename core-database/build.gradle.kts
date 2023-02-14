@@ -3,6 +3,10 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+    namespace = "dev.nmgalo.core.database"
+}
+
 dependencies {
     implementation(project(":core-model"))
 

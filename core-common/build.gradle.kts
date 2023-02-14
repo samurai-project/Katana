@@ -3,6 +3,10 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+    namespace = "dev.nmgalo.core.common"
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
 
