@@ -8,6 +8,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import dev.nmgalo.katana.ui.navigation.Screen
 
 @Composable
 fun rememberKatanaAppState(
@@ -28,7 +29,19 @@ class KatanaAppState(
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
 
+    val currentTopLevelDestination: Screen?
+        @Composable get() = when (currentDestination?.route) {
+            "home" -> Screen.Wall
+            "me" -> Screen.Profile
+            "general" -> Screen.Settings
+            else -> null
+        }
+
     fun navigate(destination: String) {
+        navController.navigate(destination)
+    }
+
+    fun topLevelNavigation(destination: String) {
         navController.navigate(destination) {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true

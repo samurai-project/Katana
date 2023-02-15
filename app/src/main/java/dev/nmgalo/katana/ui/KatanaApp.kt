@@ -52,8 +52,9 @@ fun KatanaApp() {
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.onBackground,
             bottomBar = {
+                if (appState.currentTopLevelDestination == null) return@Scaffold
                 KatanaBottomNav(appState.currentDestination) { destination ->
-                    appState.navigate(destination)
+                    appState.topLevelNavigation(destination)
                 }
             }
         ) { padding ->
