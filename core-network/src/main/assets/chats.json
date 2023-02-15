@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "lastUserId": 1,
+    "lastMessageId": 2
+  },
+  {
+    "id": 2,
+    "lastUserId": 2,
+    "lastMessageId": 3
+  },
+  {
+    "id": 3,
+    "lastUserId": 1,
+    "lastMessageId": 4
+  },
+  {
+    "id": 4,
+    "lastUserId": 1,
+    "lastMessageId": 5
+  },
+  {
+    "id": 5,
+    "lastUserId": 2,
+    "lastMessageId": 6
+  }
+]

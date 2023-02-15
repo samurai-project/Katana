@@ -3,6 +3,7 @@ package dev.nmgalo.core.network.fake
 import dev.nmgalo.core.common.Dispatcher
 import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.network.KatanaNetworkDataSource
+import dev.nmgalo.core.network.fake.model.ChatDTO
 import dev.nmgalo.core.network.fake.model.MessageDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -27,7 +28,13 @@ class FakeKatanaNetworkApi @Inject constructor(
             fakeAssetManager.open(CONVERSATIONS).use(networkJson::decodeFromStream)
         }
 
+    @OptIn(ExperimentalSerializationApi::class)
+    override suspend fun getChats(): List<ChatDTO> = withContext(io) {
+        fakeAssetManager.open(CHATS).use(networkJson::decodeFromStream)
+    }
+
     companion object {
         const val CONVERSATIONS = "conversation.json"
+        const val CHATS = "chats.json"
     }
 }

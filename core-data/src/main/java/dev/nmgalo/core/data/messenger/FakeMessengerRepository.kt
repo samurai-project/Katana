@@ -3,6 +3,8 @@ package dev.nmgalo.core.data.messenger
 import dev.nmgalo.core.common.Dispatcher
 import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.common.di.FakeImplementation
+import dev.nmgalo.core.database.messenger.chat.Chat
+import dev.nmgalo.core.database.messenger.chat.ChatDao
 import dev.nmgalo.core.database.messenger.message.Message
 import dev.nmgalo.core.database.messenger.message.MessageDao
 import dev.nmgalo.core.model.messenger.MessageStatus
@@ -12,6 +14,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
+import dev.nmgalo.core.model.chat.Chat as ChatDomainModel
 import dev.nmgalo.core.model.messenger.Message as MessageDomainModel
 
 class FakeMessengerRepository @Inject constructor(
@@ -19,8 +22,30 @@ class FakeMessengerRepository @Inject constructor(
     private val io: CoroutineDispatcher,
     @FakeImplementation
     private val dataSource: KatanaNetworkDataSource,
-    private val dao: MessageDao
+    private val messageDao: MessageDao,
+    private val chatDao: ChatDao
 ) : MessengerRepository {
+
+    override fun fetchNextChats(): Flow<Unit> = flow {
+        dataSource.getChats().map { chat ->
+            Chat(
+                id = chat.id,
+                lastUserId = chat.lastUserId,
+                lastMessageId = chat.lastMessageId
+            )
+        }.apply { chatDao.insertAll(this) }
+        emit(Unit)
+    }.flowOn(io)
+
+    override fun getAllChats(): Flow<List<ChatDomainModel>> = flow {
+        emit(chatDao.getChats().map { chat ->
+            ChatDomainModel(
+                id = chat.id ?: error("chatId can't be null"),
+                lastUserId = chat.lastUserId,
+                lastMessageId = chat.lastMessageId
+            )
+        })
+    }.flowOn(io)
 
     override fun fetchNextMessages(chatId: Long) = flow {
         val messages = dataSource.getConversation(chatId).map { data ->
@@ -38,13 +63,13 @@ class FakeMessengerRepository @Inject constructor(
             )
         }
 
-        dao.insertAll(messages)
+        messageDao.insertAll(messages)
 
         emit(Unit)
     }.flowOn(io)
 
     override fun getAllByChatId(chatId: Long): Flow<List<MessageDomainModel>> = flow {
-        emit(dao.getChatMessages(chatId).map {
+        emit(messageDao.getChatMessages(chatId).map {
             MessageDomainModel(
                 id = it.id ?: -1,
                 chatId = it.chatId,

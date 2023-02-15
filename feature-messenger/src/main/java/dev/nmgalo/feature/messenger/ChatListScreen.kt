@@ -16,12 +16,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.nmgalo.core.ui.MobileFullPreview
 
@@ -32,12 +34,20 @@ typealias OnItemClick = (route: String) -> Unit
 fun ChatListScreen(
     onItemClick: OnItemClick,
     modifier: Modifier = Modifier,
+    viewModel: ChatListViewModel = hiltViewModel()
 ) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize()
-    ) {
-        items(count = 6) {
-            ConversationItem(onItemClick::invoke)
+
+    val state = viewModel.chatListState.collectAsState()
+
+    when (val chatState = state.value) {
+        ChatListState.Error,
+        ChatListState.Loading -> Unit
+        is ChatListState.Success -> {
+            LazyColumn(modifier = modifier.fillMaxSize()) {
+                items(count = chatState.data.size) {
+                    ConversationItem(onItemClick::invoke)
+                }
+            }
         }
     }
 }
