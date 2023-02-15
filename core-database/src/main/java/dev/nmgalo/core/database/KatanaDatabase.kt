@@ -14,9 +14,7 @@ import dev.nmgalo.core.database.messenger.user.UserDao
     entities = [User::class, Chat::class, Message::class],
     version = 1
 )
-@TypeConverters(
-    DateConverters::class
-)
+@TypeConverters(DateConverters::class)
 abstract class KatanaDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

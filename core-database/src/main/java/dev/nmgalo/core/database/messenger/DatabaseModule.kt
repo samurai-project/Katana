@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.nmgalo.core.database.KatanaDatabase
+import dev.nmgalo.core.database.messenger.message.MessageDao
 import dev.nmgalo.core.database.messenger.user.UserDao
 
 @Module
@@ -27,4 +28,9 @@ object DatabaseModule {
     fun provideUserDao(
         katanaDatabase: KatanaDatabase
     ): UserDao = katanaDatabase.userDao()
+
+    @Provides
+    fun providesMessageDao(
+        katanaDatabase: KatanaDatabase
+    ): MessageDao = katanaDatabase.messageDao()
 }

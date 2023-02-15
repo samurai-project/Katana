@@ -8,7 +8,7 @@ import java.sql.Date
 
 @Entity(tableName = "message")
 data class Message(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Long? = null,
     @ColumnInfo(name = "user_id")
     val userId: Long,
@@ -19,5 +19,5 @@ data class Message(
     @ColumnInfo(name = "status")
     val status: MessageStatus,
     @ColumnInfo(name = "created_at")
-    val createdAt: Date
+    val createdAt: Long?
 )

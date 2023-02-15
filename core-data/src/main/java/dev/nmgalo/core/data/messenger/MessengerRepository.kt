@@ -4,5 +4,8 @@ import dev.nmgalo.core.model.messenger.Message
 import kotlinx.coroutines.flow.Flow
 
 interface MessengerRepository {
-    fun getMessagesByChatId(conversationId: Long): Flow<List<Message>>
+
+    fun fetchNextMessages(chatId: Long): Flow<Unit>
+
+    fun getAllByChatId(chatId: Long): Flow<List<Message>>
 }
