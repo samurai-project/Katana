@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,6 +44,12 @@ fun ChatListScreen(
     when (val chatState = state.value) {
         ChatListState.Error,
         ChatListState.Loading -> Unit
+        ChatListState.Empty -> Box(modifier = modifier.fillMaxSize()) {
+            Text(
+                stringResource(R.string.no_chat_message),
+                modifier = modifier.align(Alignment.Center)
+            )
+        }
         is ChatListState.Success -> {
             LazyColumn(modifier = modifier.fillMaxSize()) {
                 items(count = chatState.data.size) { index ->

@@ -8,5 +8,7 @@ sealed interface ChatListState {
 
     object Error : ChatListState
 
+    object Empty : ChatListState
+
     data class Success(val data: List<Chat>) : ChatListState
 }

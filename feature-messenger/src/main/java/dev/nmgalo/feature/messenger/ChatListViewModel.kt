@@ -19,7 +19,8 @@ class ChatListViewModel @Inject constructor(
 ) : ViewModel() {
 
     val chatListState: StateFlow<ChatListState> = messengerRepository.getAllChats().flatMapLatest {
-        flowOf(ChatListState.Success(it.map { chat ->
+        if (it.isEmpty()) flowOf(ChatListState.Empty)
+        else flowOf(ChatListState.Success(it.map { chat ->
             Chat(
                 id = chat.id,
                 userName = chat.userName,
