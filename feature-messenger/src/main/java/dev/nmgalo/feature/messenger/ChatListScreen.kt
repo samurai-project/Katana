@@ -66,7 +66,7 @@ fun ConversationItem(chat: Chat, onItemClick: OnItemClick, modifier: Modifier = 
     ) {
         Box {
             AsyncImage(
-                model = "https://loremflickr.com/536/536",
+                model = chat.userProfilePicture,
                 contentDescription = "Contact profile picture",
                 modifier = modifier
                     .padding(all = 5.dp)
@@ -83,17 +83,17 @@ fun ConversationItem(chat: Chat, onItemClick: OnItemClick, modifier: Modifier = 
 
         Spacer(modifier = modifier.width(8.dp))
 
-        UserIdentifierColumn()
+        UserIdentifierColumn(chat)
     }
 }
 
 @Composable
-fun UserIdentifierColumn() {
+fun UserIdentifierColumn(chat: Chat) {
     Column {
-        Text(text = "Jane doe", style = MaterialTheme.typography.titleSmall)
+        Text(text = chat.userName, style = MaterialTheme.typography.titleSmall)
         Spacer(modifier = Modifier.height(2.dp))
         Text(
-            text = "Hello nick, How are you?",
+            text = chat.lastMessage,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.labelSmall

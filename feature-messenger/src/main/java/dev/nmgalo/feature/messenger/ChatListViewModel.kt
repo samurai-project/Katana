@@ -22,8 +22,9 @@ class ChatListViewModel @Inject constructor(
         flowOf(ChatListState.Success(it.map { chat ->
             Chat(
                 id = chat.id,
-                lastUserId = chat.lastUserId,
-                lastMessageId = chat.lastMessageId
+                userName = chat.userName,
+                userProfilePicture = chat.userProfilePicture,
+                lastMessage = chat.lastMessage
             )
         }))
     }.stateIn(

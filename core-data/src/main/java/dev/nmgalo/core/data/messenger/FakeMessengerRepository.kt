@@ -38,11 +38,12 @@ class FakeMessengerRepository @Inject constructor(
     }.flowOn(io)
 
     override fun getAllChats(): Flow<List<ChatDomainModel>> = flow {
-        emit(chatDao.getChats().map { chat ->
+        emit(chatDao.getChats().map { result ->
             ChatDomainModel(
-                id = chat.id ?: error("chatId can't be null"),
-                lastUserId = chat.lastUserId,
-                lastMessageId = chat.lastMessageId
+                id = result.chat.id ?: error("chatId can't be null"),
+                userName = result.user.name,
+                userProfilePicture = result.user.profilePicUrl,
+                lastMessage = result.message.text
             )
         })
     }.flowOn(io)
