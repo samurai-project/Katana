@@ -3,18 +3,18 @@ package dev.nmgalo.feature.messenger
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.nmgalo.core.ui.MobileFullPreview
+import dev.nmgalo.feature.messenger.model.Chat
 
 typealias OnItemClick = (route: String) -> Unit
 
@@ -44,8 +45,8 @@ fun ChatListScreen(
         ChatListState.Loading -> Unit
         is ChatListState.Success -> {
             LazyColumn(modifier = modifier.fillMaxSize()) {
-                items(count = chatState.data.size) {
-                    ConversationItem(onItemClick::invoke)
+                items(count = chatState.data.size) { index ->
+                    ConversationItem(chat = chatState.data[index], onItemClick::invoke)
                 }
             }
         }
@@ -53,14 +54,13 @@ fun ChatListScreen(
 }
 
 @Composable
-fun ConversationItem(onItemClick: OnItemClick, modifier: Modifier = Modifier) {
+fun ConversationItem(chat: Chat, onItemClick: OnItemClick, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .padding(horizontal = 10.dp, vertical = 8.dp)
             .fillMaxSize()
             .clickable {
-                val mockChatId = 1L
-                onItemClick("chat/$mockChatId")
+                onItemClick("chat/${chat.id}")
             },
         verticalAlignment = Alignment.CenterVertically
     ) {
