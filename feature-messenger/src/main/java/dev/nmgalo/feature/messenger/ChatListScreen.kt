@@ -82,6 +82,7 @@ fun ConversationItem(chat: Chat, onItemClick: OnItemClick, modifier: Modifier = 
                     .clip(CircleShape)
             )
             Canvas(modifier = modifier
+                .padding(all = 5.dp)
                 .size(12.dp)
                 .align(Alignment.BottomEnd), onDraw = {
                 drawCircle(color = Color.Green)
@@ -111,5 +112,10 @@ fun UserIdentifierColumn(chat: Chat) {
 @MobileFullPreview
 @Composable
 fun PreviewChatList() {
-    ChatListScreen(onItemClick = {})
+    ConversationItem(Chat(
+        id = 1,
+        userName = "Nika Mgalo",
+        userProfilePicture = "https://",
+        lastMessage = "nick"
+    ), onItemClick = {})
 }
