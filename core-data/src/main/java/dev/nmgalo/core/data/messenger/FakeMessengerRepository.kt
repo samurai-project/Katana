@@ -9,6 +9,7 @@ import dev.nmgalo.core.database.messenger.message.Message
 import dev.nmgalo.core.database.messenger.message.MessageDao
 import dev.nmgalo.core.model.messenger.MessageStatus
 import dev.nmgalo.core.network.KatanaNetworkDataSource
+import dev.nmgalo.core.network.fake.model.SendMessageDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -80,6 +81,17 @@ class FakeMessengerRepository @Inject constructor(
                 createdAt = it.createdAt ?: -1
             )
         })
+    }.flowOn(io)
+
+    override fun sendMessage(text: String) = flow {
+        dataSource.sendMessage(
+            SendMessageDTO(
+                chatId = 1,
+                message = text,
+                createdAt = 1
+            )
+        )
+        emit(Unit)
     }.flowOn(io)
 
     companion object {

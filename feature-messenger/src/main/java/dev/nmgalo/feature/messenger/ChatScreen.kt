@@ -1,21 +1,38 @@
 package dev.nmgalo.feature.messenger
 
+import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Send
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.nmgalo.core.ui.MobileFullPreview
@@ -31,21 +48,40 @@ fun ChatScreen(
     when (val state = conversationState.value) {
         ConversationState.Error -> TODO()
         ConversationState.Loading -> Text("Cool loader.")
-        is ConversationState.Success -> MessageList(state.conversation)
-    }
-}
-
-@Composable
-fun MessageList(conversation: List<Message>) {
-    LazyColumn(modifier = Modifier.fillMaxSize(), reverseLayout = true) {
-        items(conversation.size) { index ->
-            ConversationMessageItem(conversation[index])
+        is ConversationState.Success -> MessageList(state.conversation) {
+            viewModel.sendMessage(it)
         }
     }
 }
 
 @Composable
-fun ConversationMessageItem(message: Message, modifier: Modifier = Modifier) {
+fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
+    val context = LocalContext.current
+    Column {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(weight = 1f), reverseLayout = true
+        ) {
+            items(conversation.size) { index ->
+                ConversationMessageItem(conversation[index], onLongPress = {
+                    Toast.makeText(context, "OnLongPress", Toast.LENGTH_SHORT).show()
+                })
+            }
+        }
+        Box(modifier = Modifier.height(70.dp)) {
+            MessageBar { onSend(it) }
+        }
+    }
+}
+
+@Composable
+fun ConversationMessageItem(
+    message: Message,
+    onLongPress: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+
     Column(
         modifier = modifier
             .padding(horizontal = 20.dp, vertical = 5.dp)
@@ -59,16 +95,53 @@ fun ConversationMessageItem(message: Message, modifier: Modifier = Modifier) {
                 .background(color = with(MaterialTheme.colorScheme) {
                     if (message.isMe) primary else surfaceVariant
                 })
+                .clickable { }
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onLongPress = {
+                            onLongPress()
+                        }
+                    )
+                }
         ) {
-            SelectionContainer {
-                Text(
-                    text = message.message,
-                    modifier = modifier.padding(10.dp),
-                    color = with(MaterialTheme.colorScheme) {
-                        if (message.isMe) onPrimary else onSurfaceVariant
-                    }
-                )
-            }
+            Text(
+                text = message.message,
+                modifier = modifier.padding(10.dp),
+                color = with(MaterialTheme.colorScheme) {
+                    if (message.isMe) onPrimary else onSurfaceVariant
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun MessageBar(
+    modifier: Modifier = Modifier,
+    onSend: (String) -> Unit
+) {
+    val text = remember { mutableStateOf("") }
+    Row(
+        modifier = modifier.fillMaxSize(),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        BasicTextField(
+            modifier = modifier
+                .weight(weight = 1f)
+                .fillMaxHeight()
+                .padding(10.dp)
+                .background(Color.Green),
+            value = text.value,
+            maxLines = 3,
+            onValueChange = { text.value = it })
+
+        IconButton(modifier = modifier.fillMaxHeight(), onClick = {
+            onSend(text.value)
+        }) {
+            Icon(
+                Icons.Outlined.Send, "Send",
+                modifier = modifier.width(width = 40.dp)
+            )
         }
     }
 }

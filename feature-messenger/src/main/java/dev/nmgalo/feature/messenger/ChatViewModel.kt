@@ -11,11 +11,12 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
-    messageRepository: MessengerRepository,
+    private val messageRepository: MessengerRepository,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -36,4 +37,10 @@ class ChatViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
             initialValue = ConversationState.Loading
         )
+
+    fun sendMessage(message: String) {
+        viewModelScope.launch {
+            messageRepository.sendMessage(message)
+        }
+    }
 }

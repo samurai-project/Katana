@@ -13,4 +13,6 @@ interface MessengerRepository {
     fun fetchNextMessages(chatId: Long): Flow<Unit>
 
     fun getAllByChatId(chatId: Long): Flow<List<Message>>
+
+    fun sendMessage(text: String): Flow<Unit>
 }

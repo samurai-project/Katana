@@ -40,7 +40,7 @@ fun KatanaApp() {
             topBar = {
                 TopAppBar(title = { Text(stringResource(id = R.string.app_name)) }, actions = {
                     IconButton(onClick = {
-                        appState.navigate("messenger")
+                        appState.topLevelNavigation("messenger")
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_messenger),
