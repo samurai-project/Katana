@@ -8,15 +8,25 @@ import dev.nmgalo.core.ui.STOP_TIMEOUT_MILLIS
 import dev.nmgalo.feature.messenger.model.Chat
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatListViewModel @Inject constructor(
-    messengerRepository: MessengerRepository
+    private val messengerRepository: MessengerRepository
 ) : ViewModel() {
+
+    fun fetchFakeData() {
+        viewModelScope.launch {
+            messengerRepository.fetchChatUsers(1).collect()
+            messengerRepository.fetchNextChats().collect()
+            messengerRepository.fetchNextMessages(1).collect()
+        }
+    }
 
     val chatListState: StateFlow<ChatListState> = messengerRepository.getAllChats().flatMapLatest {
         if (it.isEmpty()) flowOf(ChatListState.Empty)

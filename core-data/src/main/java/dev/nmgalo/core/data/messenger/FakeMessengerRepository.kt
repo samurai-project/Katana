@@ -7,9 +7,11 @@ import dev.nmgalo.core.database.messenger.chat.Chat
 import dev.nmgalo.core.database.messenger.chat.ChatDao
 import dev.nmgalo.core.database.messenger.message.Message
 import dev.nmgalo.core.database.messenger.message.MessageDao
+import dev.nmgalo.core.database.messenger.user.User
+import dev.nmgalo.core.database.messenger.user.UserDao
+import dev.nmgalo.core.model.messenger.ChatUser
 import dev.nmgalo.core.model.messenger.MessageStatus
 import dev.nmgalo.core.network.KatanaNetworkDataSource
-import dev.nmgalo.core.network.fake.model.SendMessageDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,17 +26,19 @@ class FakeMessengerRepository @Inject constructor(
     @FakeImplementation
     private val dataSource: KatanaNetworkDataSource,
     private val messageDao: MessageDao,
-    private val chatDao: ChatDao
+    private val chatDao: ChatDao,
+    private val userDao: UserDao,
 ) : MessengerRepository {
 
     override fun fetchNextChats(): Flow<Unit> = flow {
-        dataSource.getChats().map { chat ->
+        val chats = dataSource.getChats().map { chat ->
             Chat(
                 id = chat.id,
                 lastUserId = chat.lastUserId,
                 lastMessageId = chat.lastMessageId
             )
-        }.apply { chatDao.insertAll(this) }
+        }
+        chatDao.insertAll(chats)
         emit(Unit)
     }.flowOn(io)
 
@@ -45,6 +49,28 @@ class FakeMessengerRepository @Inject constructor(
                 userName = result.user.name,
                 userProfilePicture = result.user.profilePicUrl,
                 lastMessage = result.message.text
+            )
+        })
+    }.flowOn(io)
+
+    override fun fetchChatUsers(chatId: Long): Flow<Unit> = flow {
+        userDao.insertUsers(
+            dataSource.getChatUsers(chatId).map { user ->
+                User(
+                    id = user.id,
+                    name = user.name,
+                    profilePicUrl = user.profilePicUrl
+                )
+            })
+        emit(Unit)
+    }.flowOn(io)
+
+    override fun getChatUsers(userIds: IntArray): Flow<List<ChatUser>> = flow {
+        emit(userDao.getUsersById(userIds).map { user ->
+            ChatUser(
+                id = user.id ?: error("userId can't be null"),
+                name = user.name,
+                profilePicUrl = user.profilePicUrl
             )
         })
     }.flowOn(io)
@@ -70,25 +96,31 @@ class FakeMessengerRepository @Inject constructor(
         emit(Unit)
     }.flowOn(io)
 
-    override fun getAllByChatId(chatId: Long): Flow<List<MessageDomainModel>> = flow {
+    override fun getAllMessageByChatId(chatId: Long): Flow<List<MessageDomainModel>> = flow {
         emit(messageDao.getChatMessages(chatId).map {
             MessageDomainModel(
-                id = it.id ?: -1,
-                chatId = it.chatId,
-                message = it.text,
-                senderId = it.userId,
-                status = it.status,
-                createdAt = it.createdAt ?: -1
+                id = it.message.id ?: error("messageId can't be null"),
+                chatId = it.message.chatId,
+                message = it.message.text,
+                senderId = it.message.userId,
+                status = it.message.status,
+                createdAt = it.message.createdAt ?: -1,
+                user = ChatUser(
+                    id = it.user.id ?: error("userId can't be null"),
+                    name = it.user.name,
+                    profilePicUrl = it.user.profilePicUrl
+                )
             )
         })
     }.flowOn(io)
 
-    override fun sendMessage(text: String) = flow {
-        dataSource.sendMessage(
-            SendMessageDTO(
-                chatId = 1,
-                message = text,
-                createdAt = 1
+    override fun sendMessage(chatId: Long, text: String) = flow {
+        messageDao.insert(
+            Message(
+                userId = 1,
+                chatId = chatId,
+                text = text,
+                status = MessageStatus.PENDING
             )
         )
         emit(Unit)

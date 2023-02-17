@@ -1,6 +1,7 @@
 package dev.nmgalo.core.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import dev.nmgalo.core.network.fake.model.ChatUsersDTO
 import dev.nmgalo.core.network.fake.model.SendMessageDTO
 import dev.nmgalo.core.network.model.users.UserDTO
 import dev.nmgalo.core.network.model.wall.WallDTO
@@ -42,6 +43,8 @@ class KatanaNetworkClient @Inject constructor(json: Json) : KatanaNetworkDataSou
     override suspend fun getConversation(conversationId: Long) = TODO("Not yet implemented")
 
     override suspend fun getChats() = TODO("Not yet implemented")
+
+    override suspend fun getChatUsers(chatId: Long): List<ChatUsersDTO> = TODO("Not yet implemented")
 
     override suspend fun sendMessage(message: SendMessageDTO) = TODO("Not yet implemented")
 }

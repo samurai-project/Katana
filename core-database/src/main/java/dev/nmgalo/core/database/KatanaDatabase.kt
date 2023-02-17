@@ -12,7 +12,8 @@ import dev.nmgalo.core.database.messenger.user.UserDao
 
 @Database(
     entities = [User::class, Chat::class, Message::class],
-    version = 1
+    version = 1,
+    exportSchema = true
 )
 @TypeConverters(DateConverters::class)
 abstract class KatanaDatabase : RoomDatabase() {

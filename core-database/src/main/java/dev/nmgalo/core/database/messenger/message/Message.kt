@@ -19,5 +19,5 @@ data class Message(
     @ColumnInfo(name = "status")
     val status: MessageStatus,
     @ColumnInfo(name = "created_at")
-    val createdAt: Long?
+    val createdAt: Long? = null
 )

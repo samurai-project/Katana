@@ -1,6 +1,7 @@
 package dev.nmgalo.core.network
 
 import dev.nmgalo.core.network.fake.model.ChatDTO
+import dev.nmgalo.core.network.fake.model.ChatUsersDTO
 import dev.nmgalo.core.network.fake.model.MessageDTO
 import dev.nmgalo.core.network.fake.model.SendMessageDTO
 import dev.nmgalo.core.network.model.users.UserDTO
@@ -20,6 +21,8 @@ interface KatanaNetworkDataSource {
     suspend fun getConversation(conversationId: Long): List<MessageDTO>
 
     suspend fun getChats(): List<ChatDTO>
+
+    suspend fun getChatUsers(chatId: Long): List<ChatUsersDTO>
 
     suspend fun sendMessage(message: SendMessageDTO)
 }

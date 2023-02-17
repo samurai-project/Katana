@@ -2,7 +2,6 @@ package dev.nmgalo.feature.messenger
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -82,20 +81,28 @@ fun ConversationMessageItem(
     modifier: Modifier = Modifier
 ) {
 
+    val alignment = if (message.isMe) Alignment.End else Alignment.Start
+
+    // Pair<Background, TextColor>
+    val color: Pair<Color, Color> = with(MaterialTheme.colorScheme) {
+        if (message.isMe) primary to onPrimary else surfaceVariant to onSurfaceVariant
+    }
+
     Column(
         modifier = modifier
             .padding(horizontal = 20.dp, vertical = 5.dp)
             .fillMaxWidth()
     ) {
-        Box(
+        Text(
+            text = message.user.name,
+            style = MaterialTheme.typography.labelSmall,
+            modifier = modifier.align(alignment)
+        )
+        Column(
             modifier = modifier
-                .align(if (message.isMe) Alignment.End else Alignment.Start)
-                .clip(RoundedCornerShape(20.dp))
-                .fillMaxWidth(fraction = 0.90f)
-                .background(color = with(MaterialTheme.colorScheme) {
-                    if (message.isMe) primary else surfaceVariant
-                })
-                .clickable { }
+                .align(alignment)
+                .padding(top = 5.dp)
+                .fillMaxWidth(fraction = 0.80f)
                 .pointerInput(Unit) {
                     detectTapGestures(
                         onLongPress = {
@@ -104,13 +111,18 @@ fun ConversationMessageItem(
                     )
                 }
         ) {
-            Text(
-                text = message.message,
-                modifier = modifier.padding(10.dp),
-                color = with(MaterialTheme.colorScheme) {
-                    if (message.isMe) onPrimary else onSurfaceVariant
-                }
-            )
+            Box(
+                modifier = modifier
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(color = color.first)
+                    .align(alignment)
+            ) {
+                Text(
+                    text = message.message,
+                    modifier = modifier.padding(vertical = 10.dp, horizontal = 15.dp),
+                    color = color.second
+                )
+            }
         }
     }
 }
@@ -129,8 +141,7 @@ fun MessageBar(
             modifier = modifier
                 .weight(weight = 1f)
                 .fillMaxHeight()
-                .padding(10.dp)
-                .background(Color.Green),
+                .padding(10.dp),
             value = text.value,
             maxLines = 3,
             onValueChange = { text.value = it })
