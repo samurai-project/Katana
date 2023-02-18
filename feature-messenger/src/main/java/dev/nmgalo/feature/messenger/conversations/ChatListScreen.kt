@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.conversations
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.nmgalo.core.ui.MobileFullPreview
+import dev.nmgalo.feature.messenger.R
 import dev.nmgalo.feature.messenger.model.Chat
 
 typealias OnItemClick = (route: String) -> Unit

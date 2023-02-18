@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.conversations
 
 import dev.nmgalo.feature.messenger.model.Chat
 

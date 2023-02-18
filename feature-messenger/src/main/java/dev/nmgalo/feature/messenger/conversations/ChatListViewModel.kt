@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.conversations
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

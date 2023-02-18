@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.chat
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -42,12 +42,12 @@ import dev.nmgalo.feature.messenger.model.Message
 fun ChatScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
-    val conversationState = viewModel.conversationState.collectAsState()
+    val conversationState = viewModel.chatState.collectAsState()
 
     when (val state = conversationState.value) {
-        ConversationState.Error -> TODO()
-        ConversationState.Loading -> Text("Cool loader.")
-        is ConversationState.Success -> MessageList(state.conversation) {
+        ChatState.Error -> TODO()
+        ChatState.Loading -> Text("Cool loader.")
+        is ChatState.Success -> MessageList(state.conversation) {
             viewModel.sendMessage(it)
         }
     }
@@ -63,7 +63,7 @@ fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
                 .weight(weight = 1f), reverseLayout = true
         ) {
             items(conversation.size) { index ->
-                ConversationMessageItem(conversation[index], onLongPress = {
+                ConversationMessageItem(message = conversation[index], onLongPress = {
                     Toast.makeText(context, "OnLongPress", Toast.LENGTH_SHORT).show()
                 })
             }

@@ -1,4 +1,4 @@
-package dev.nmgalo.feature.messenger
+package dev.nmgalo.feature.messenger.chat
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -25,9 +25,9 @@ class ChatViewModel @Inject constructor(
     private val chatId =
         savedStateHandle.get<Long>("chatId") ?: error("argument `chatId` is required")
 
-    val conversationState = messageRepository.getAllMessageByChatId(chatId = chatId)
+    val chatState = messageRepository.getAllMessageByChatId(chatId = chatId)
         .flatMapLatest {
-            flowOf(ConversationState.Success(it.map { message ->
+            flowOf(ChatState.Success(it.map { message ->
                 Message(
                     id = message.id,
                     message = message.message,
@@ -42,7 +42,7 @@ class ChatViewModel @Inject constructor(
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
-            initialValue = ConversationState.Loading
+            initialValue = ChatState.Loading
         )
 
     fun sendMessage(message: String) {
