@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import dev.nmgalo.core.model.messenger.Message as MessageModel
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
@@ -27,18 +28,7 @@ class ChatViewModel @Inject constructor(
 
     val chatState = messageRepository.getAllMessageByChatId(chatId = chatId)
         .flatMapLatest {
-            flowOf(ChatState.Success(it.map { message ->
-                Message(
-                    id = message.id,
-                    message = message.message,
-                    isMe = message.senderId == 1L,
-                    user = User(
-                        id = message.user.id,
-                        name = message.user.name,
-                        profilePicUrl = message.user.profilePicUrl
-                    )
-                )
-            }))
+            flowOf(ChatState.Success(it.mapToUiModel()))
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
@@ -49,5 +39,18 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             messageRepository.sendMessage(chatId, message).collect()
         }
+    }
+
+    private fun List<MessageModel>.mapToUiModel() = this.map { message ->
+        Message(
+            id = message.id,
+            message = message.message,
+            isMe = message.senderId == 1L,
+            user = User(
+                id = message.user.id,
+                name = message.user.name,
+                profilePicUrl = message.user.profilePicUrl
+            )
+        )
     }
 }
