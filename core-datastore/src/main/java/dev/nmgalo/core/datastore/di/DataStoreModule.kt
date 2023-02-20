@@ -9,13 +9,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dev.nmgalo.core.common.Dispatcher
-import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.datastore.UserPreferences
 import dev.nmgalo.core.datastore.UserPreferencesSerializer
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import javax.inject.Singleton
 
 @Module
@@ -26,11 +21,9 @@ object DataStoreModule {
     @Singleton
     fun provideUserPreferencesDataStore(
         @ApplicationContext context: Context,
-        @Dispatcher(KatanaDispatchers.IO) io: CoroutineDispatcher,
         userPreferencesSerializer: UserPreferencesSerializer
     ): DataStore<UserPreferences> = DataStoreFactory.create(
-        serializer = userPreferencesSerializer,
-        scope = CoroutineScope(SupervisorJob() + io)
+        serializer = userPreferencesSerializer
     ) {
         context.dataStoreFile("user_preferences.pb")
     }
