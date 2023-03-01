@@ -50,7 +50,7 @@ fun WallScreen(
     when (val state = wallState.value) {
         WallUiState.Loading -> Loader()
         WallUiState.Error -> Text("An error occurred, changed this error later!")
-        is WallUiState.Success -> ChatList(wall = state.wall)
+        is WallUiState.Success -> PostList(wall = state.wall)
     }
 }
 
@@ -65,7 +65,7 @@ fun Loader(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ChatList(modifier: Modifier = Modifier, wall: List<Wall>) {
+fun PostList(modifier: Modifier = Modifier, wall: List<Wall>) {
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -75,7 +75,7 @@ fun ChatList(modifier: Modifier = Modifier, wall: List<Wall>) {
             CreatePost()
         }
         items(wall) { wallItem ->
-            WallItem(item = wallItem)
+            Post(item = wallItem)
         }
     }
 }
@@ -110,7 +110,7 @@ fun CreatePost() {
 }
 
 @Composable
-fun WallItem(modifier: Modifier = Modifier, item: Wall) {
+fun Post(modifier: Modifier = Modifier, item: Wall) {
     Column(
         modifier = modifier
             .padding(vertical = 10.dp)
