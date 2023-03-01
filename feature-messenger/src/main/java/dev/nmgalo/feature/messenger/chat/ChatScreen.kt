@@ -2,6 +2,7 @@ package dev.nmgalo.feature.messenger.chat
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,6 +25,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,10 +35,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.nmgalo.core.ui.MobileFullPreview
+import dev.nmgalo.feature.messenger.chat.MessageSwipeState.Closed
+import dev.nmgalo.feature.messenger.chat.MessageSwipeState.Open
+import dev.nmgalo.feature.messenger.chat.lib.compose.FractionalThreshold
+import dev.nmgalo.feature.messenger.chat.lib.compose.rememberSwipeableState
+import dev.nmgalo.feature.messenger.chat.lib.compose.swipeable
 import dev.nmgalo.feature.messenger.model.Message
+import kotlin.math.roundToInt
 
 
 @Composable
@@ -74,6 +85,11 @@ fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
     }
 }
 
+enum class MessageSwipeState {
+    Open,
+    Closed
+}
+
 @Composable
 fun ConversationMessageItem(
     message: Message,
@@ -86,6 +102,15 @@ fun ConversationMessageItem(
     // Pair<Background, TextColor>
     val color: Pair<Color, Color> = with(MaterialTheme.colorScheme) {
         if (message.isMe) primary to onPrimary else surfaceVariant to onSurfaceVariant
+    }
+
+    val swipeableState = rememberSwipeableState(Closed)
+    val openPixels = with(LocalDensity.current) { 200.dp.toPx() }
+    val anchors = mapOf(0f to Closed, openPixels to Open)
+
+    DisposableEffect(anchors) {
+//        swipeableState.direction
+        onDispose { }
     }
 
     Column(
@@ -110,12 +135,19 @@ fun ConversationMessageItem(
                         }
                     )
                 }
+                .offset(offset = { IntOffset(x = swipeableState.offset.value.roundToInt(), y = 0) })
         ) {
             Box(
                 modifier = modifier
                     .clip(RoundedCornerShape(20.dp))
                     .background(color = color.first)
                     .align(alignment)
+                    .swipeable(
+                        state = swipeableState,
+                        anchors = anchors,
+                        thresholds = { _, _ -> FractionalThreshold(fraction = 1f) },
+                        orientation = Orientation.Horizontal
+                    )
             ) {
                 Text(
                     text = message.message,
