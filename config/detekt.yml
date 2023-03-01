@@ -568,9 +568,6 @@ style:
       - '0'
       - '1'
       - '2'
-      - '6' # TODO: remove later, important!!
-      - '0.6' # TODO: remove later, important!!
-      - '300' # TODO: remove later, important!!
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: false
     ignoreLocalVariableDeclaration: false
