@@ -74,11 +74,6 @@ fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
     }
 }
 
-enum class MessageSwipeState {
-    Open,
-    Closed
-}
-
 @Composable
 fun ConversationMessageItem(
     message: Message,
