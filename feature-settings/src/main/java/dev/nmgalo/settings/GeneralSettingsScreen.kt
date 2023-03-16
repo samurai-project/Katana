@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -22,12 +22,8 @@ import dev.nmgalo.feature.settings.R
 fun GeneralSettingsScreen(
     viewModel: GeneralScreenViewModel = hiltViewModel()
 ) {
-    val checked = remember { mutableStateOf(viewModel.isDarkModeEnabled.value) }
-
-    DisposableEffect(checked.value) {
-        viewModel.setDarkModeIsEnabled(checked.value)
-        onDispose { }
-    }
+    val currentState = viewModel.isDarkModeEnabled.collectAsState()
+    val checked = remember { mutableStateOf(currentState) }
 
     Column(
         modifier = Modifier
@@ -40,8 +36,8 @@ fun GeneralSettingsScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(stringResource(R.string.enable_dark_mode))
-            Switch(checked = checked.value, onCheckedChange = {
-                checked.value = it
+            Switch(checked = checked.value.value, onCheckedChange = {
+                viewModel.setDarkModeIsEnabled(it)
             })
         }
     }

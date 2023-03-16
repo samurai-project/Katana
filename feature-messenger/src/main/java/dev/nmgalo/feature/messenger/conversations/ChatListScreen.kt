@@ -50,6 +50,7 @@ fun ChatListScreen(
                 stringResource(R.string.no_chat_message),
                 modifier = modifier.align(Alignment.Center)
             )
+            viewModel.fetchFakeData()
         }
         is ChatListState.Success -> {
             LazyColumn(modifier = modifier.fillMaxSize()) {
