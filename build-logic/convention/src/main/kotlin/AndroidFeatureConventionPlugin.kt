@@ -15,8 +15,8 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
             pluginManager.apply {
                 apply("katana.android.library")
+                apply("katana.android.hilt")
                 apply("org.jetbrains.kotlin.android")
-                apply("org.jetbrains.kotlin.kapt")
             }
             extensions.configure<LibraryExtension> {
                 composeOptions {
@@ -39,15 +39,16 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
 
                 add("implementation", libs.findLibrary("coil.kt").get())
 
-                add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
-
                 add(
                     "implementation",
                     libs.findLibrary("androidx.compose.material.iconsExtended").get()
                 )
                 add("implementation", libs.findLibrary("androidx.compose.material3").get())
                 add("debugImplementation", libs.findLibrary("androidx.compose.ui.tooling").get())
-                add("debugImplementation", libs.findLibrary("androidx.customview.poolingcontainer").get())
+                add(
+                    "debugImplementation",
+                    libs.findLibrary("androidx.customview.poolingcontainer").get()
+                )
                 add("implementation", libs.findLibrary("androidx.compose.ui.tooling.preview").get())
 
 
@@ -57,9 +58,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 )
 
                 add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())
-
-                add("implementation", libs.findLibrary("hilt.android").get())
-                add("kapt", libs.findLibrary("hilt.compiler").get())
             }
         }
     }

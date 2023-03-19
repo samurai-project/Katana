@@ -1,6 +1,6 @@
 plugins {
     id("katana.android.library")
-    kotlin("kapt")
+    id("katana.android.hilt")
 }
 
 android {
@@ -18,7 +18,4 @@ dependencies {
 
     implementation(libs.androidx.room)
     kapt(libs.androidx.room.compiler)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 }

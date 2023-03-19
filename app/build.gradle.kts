@@ -2,8 +2,7 @@
 
 plugins {
     id("katana.android.application")
-    kotlin("kapt")
-    alias(libs.plugins.hilt)
+    id("katana.android.hilt")
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
 }
@@ -82,9 +81,6 @@ dependencies {
     implementation(libs.androidx.profile.installer)
 
     implementation(libs.accompanist.pager)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)

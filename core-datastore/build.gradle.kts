@@ -7,7 +7,7 @@ import com.google.protobuf.gradle.protoc
 
 plugins {
     id("katana.android.library")
-    kotlin("kapt")
+    id("katana.android.hilt")
     alias(libs.plugins.protobuf)
 }
 
@@ -39,7 +39,4 @@ dependencies {
 
     implementation(libs.androidx.datastore)
     implementation(libs.protobuf.kotlin.lite)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 }

@@ -1,8 +1,7 @@
 plugins {
     id("katana.android.library")
+    id("katana.android.hilt")
     id("kotlinx-serialization")
-    id("dagger.hilt.android.plugin")
-    kotlin("kapt")
 }
 
 android {
@@ -23,7 +22,4 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 }

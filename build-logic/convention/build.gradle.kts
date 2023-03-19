@@ -32,5 +32,9 @@ gradlePlugin {
             id = "katana.android.test"
             implementationClass = "AndroidTestConventionPlugin"
         }
+        register("androidHilt") {
+            id = "katana.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
     }
 }
