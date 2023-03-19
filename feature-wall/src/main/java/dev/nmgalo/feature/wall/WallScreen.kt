@@ -22,6 +22,8 @@ import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -132,6 +134,8 @@ fun Post(modifier: Modifier = Modifier, item: Wall) {
 
 @Composable
 fun WallItemHeader(modifier: Modifier = Modifier) {
+    val expanded = remember { mutableStateOf(false) }
+
     Column(modifier = modifier.padding(16.dp)) {
         Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Row {
@@ -145,7 +149,17 @@ fun WallItemHeader(modifier: Modifier = Modifier) {
                 )
             }
             Row {
-                Icon(Icons.Filled.MoreHoriz, "More", modifier = modifier.clickable { })
+                Icon(
+                    Icons.Filled.MoreHoriz,
+                    "More",
+                    modifier = modifier.clickable { expanded.value = true })
+                DropdownMenu(
+                    expanded = expanded.value,
+                    onDismissRequest = { expanded.value = false }) {
+                    DropdownMenuItem(text = { Text("Edit") }, onClick = { /*TODO*/ })
+                    DropdownMenuItem(text = { Text("Report") }, onClick = { /*TODO*/ })
+                    DropdownMenuItem(text = { Text("Save") }, onClick = { /*TODO*/ })
+                }
             }
         }
         Row(modifier = modifier.padding(top = 32.dp, bottom = 14.dp)) {
