@@ -25,6 +25,7 @@ constraintlayout = "2.1.4"
 datastore = "1.0.0"
 detekt = "1.22.0"
 firebaseBom = "31.2.0"
+firebaseAppdistribution = "4.0.0"
 firebaseCrashlytics = "2.9.2"
 googleServices = "4.3.15"
 hilt = "2.44.2"
@@ -59,8 +60,8 @@ androidx-datastore = { group = "androidx.datastore", name = "datastore", version
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
-androidx-paging-runtime = {group = "androidx.paging", name = "paging-runtime", version.ref = "androidxPaging"}
-androidx-paging-compose = {group = "androidx.paging", name = "paging-compose", version.ref = "androidxPagingCompose"}
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidxPaging" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPagingCompose" }
 androidx-profile-installer = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileInstaller" }
 androidx-room = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
@@ -97,6 +98,7 @@ retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "re
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+firebase-appdistribution = { id = "com.google.firebase.appdistribution", version.ref = "firebaseAppdistribution" }
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

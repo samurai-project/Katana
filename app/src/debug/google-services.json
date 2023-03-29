@@ -9,6 +9,35 @@
       "client_info": {
         "mobilesdk_app_id": "1:860508192620:android:6f76c4708b0c8e61c5bd49",
         "android_client_info": {
+          "package_name": "dev.nmgalo.katana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860508192620-jd9kj2j7mhqij50hb57vjtegfb2b76lg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAgvh1yfJl5iyZb6pAm4-WKfOBneuciS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860508192620-jd9kj2j7mhqij50hb57vjtegfb2b76lg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860508192620:android:d067e42e29611675c5bd49",
+        "android_client_info": {
           "package_name": "dev.nmgalo.katana.debug"
         }
       },

@@ -5,6 +5,7 @@ plugins {
     id("katana.android.hilt")
     alias(libs.plugins.google.services)
     alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.firebase.appdistribution)
 }
 
 android {
@@ -25,6 +26,11 @@ android {
     buildTypes {
         val debug by getting {
             applicationIdSuffix = ".debug"
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "release-notes.txt"
+                groups = "debug-group"
+            }
         }
         val release by getting {
             isMinifyEnabled = true
@@ -32,6 +38,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            firebaseAppDistribution {
+                artifactType = "APK"
+                releaseNotesFile = "release-notes.txt"
+                testers = "nikolozamgalo@gmail.com"
+            }
         }
         val benchmark by creating {
             initWith(release)
