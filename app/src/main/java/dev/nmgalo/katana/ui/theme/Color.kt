@@ -1,5 +1,3 @@
-@file:Suppress("TopLevelPropertyNaming") // Rome once https://github.com/SamuraiProject/Katana/issues/2 is fixed
-
 package dev.nmgalo.katana.ui.theme
 
 const val Blue10 = 0xFF000F5E
