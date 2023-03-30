@@ -13,7 +13,7 @@ import okhttp3.Request
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
-private const val SIGNALING_URL = "ws://192.168.100.9:8080/rtc"
+private const val SIGNALING_URL = "ws://192.168.106.177:8080/rtc"
 
 class SignalingClient {
     private val signalingScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)

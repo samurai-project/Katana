@@ -1,6 +1,5 @@
 package dev.nmgalo.katana
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,7 +15,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import dev.nmgalo.feature.messenger.p2p.ServiceLocator
 import dev.nmgalo.katana.ui.KatanaApp
 import dev.nmgalo.katana.ui.composition.LocalOnFinishDispatcher
 import dev.nmgalo.katana.ui.onboarding.OnBoardingScreen
@@ -54,11 +52,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(newBase)
-        ServiceLocator.initWithContext(newBase)
     }
 }
 

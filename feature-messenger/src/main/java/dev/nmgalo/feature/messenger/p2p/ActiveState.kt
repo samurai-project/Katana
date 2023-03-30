@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.PhoneDisabled
@@ -19,6 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
 import dev.nmgalo.core.ui.ChatActionItem
 import dev.nmgalo.core.ui.withAlpha
 import dev.nmgalo.feature.messenger.R
@@ -26,9 +27,12 @@ import dev.nmgalo.feature.messenger.databinding.WebrtcSurfaceViewRendererBinding
 
 @SuppressLint("InflateParams")
 @Composable
-fun ActiveChat(modifier: Modifier = Modifier) {
+fun ActiveChat(
+    modifier: Modifier = Modifier,
+    activeCallViewModel: ActiveCallViewModel = hiltViewModel()
+) {
 
-    val webRtcSessionManager = ServiceLocator.webRtcSessionManager
+    val webRtcSessionManager = activeCallViewModel.webRtcSessionManager
 
     var binding: WebrtcSurfaceViewRendererBinding? = null
 
@@ -43,11 +47,11 @@ fun ActiveChat(modifier: Modifier = Modifier) {
                 .inflate(R.layout.webrtc_surface_view_renderer, null, false)
             binding = WebrtcSurfaceViewRendererBinding.bind(view)
             binding?.remoteView?.let {
-                it.init(ServiceLocator.eglBaseContext, null)
+                it.init(activeCallViewModel.eglBaseContext, null)
                 it.setEnableHardwareScaler(true)
             }
             binding?.localVideo?.let {
-                it.init(ServiceLocator.eglBaseContext, null)
+                it.init(activeCallViewModel.eglBaseContext, null)
                 it.setEnableHardwareScaler(true)
                 it.setMirror(true)
             }

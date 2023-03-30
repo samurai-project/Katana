@@ -27,15 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import dev.nmgalo.core.ui.MobileFullPreview
+import dev.nmgalo.core.ui.OnNavigation
 import dev.nmgalo.feature.messenger.R
 import dev.nmgalo.feature.messenger.model.Chat
-
-typealias OnItemClick = (route: String) -> Unit
 
 @Suppress("LongMethod")
 @Composable
 fun ChatListScreen(
-    onItemClick: OnItemClick,
+    onItemClick: OnNavigation,
     modifier: Modifier = Modifier,
     viewModel: ChatListViewModel = hiltViewModel()
 ) {
@@ -63,7 +62,7 @@ fun ChatListScreen(
 }
 
 @Composable
-fun ConversationItem(chat: Chat, onItemClick: OnItemClick, modifier: Modifier = Modifier) {
+fun ConversationItem(chat: Chat, onItemClick: OnNavigation, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .padding(horizontal = 10.dp, vertical = 8.dp)

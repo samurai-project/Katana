@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Call
 import androidx.compose.material.icons.outlined.NearMe
 import androidx.compose.material.icons.outlined.PhotoCamera
 import androidx.compose.material.icons.outlined.Send
@@ -36,26 +37,30 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.nmgalo.core.ui.OnNavigation
 import dev.nmgalo.feature.messenger.R
 import dev.nmgalo.feature.messenger.model.Message
 
 @Composable
 fun ChatScreen(
-    viewModel: ChatViewModel = hiltViewModel()
+    onCall: OnNavigation,
+    viewModel: ChatViewModel = hiltViewModel(),
 ) {
     val conversationState = viewModel.chatState.collectAsState()
 
     when (val state = conversationState.value) {
         ChatState.Error -> TODO()
         ChatState.Loading -> Text("Cool loader.")
-        is ChatState.Success -> MessageList(state.conversation) {
-            viewModel.sendMessage(it)
-        }
+        is ChatState.Success -> MessageList(
+            conversation = state.conversation,
+            onSend = { viewModel.sendMessage(it) },
+            onCall = { onCall.invoke("group-call/2") },
+        )
     }
 }
 
 @Composable
-fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
+fun MessageList(conversation: List<Message>, onSend: (String) -> Unit, onCall: () -> Unit) {
     val context = LocalContext.current
     Column {
         LazyColumn(
@@ -71,7 +76,10 @@ fun MessageList(conversation: List<Message>, onSend: (String) -> Unit) {
             }
         }
         Box {
-            MessageBar { onSend(it) }
+            MessageBar(
+                onSend = onSend,
+                onCall = onCall
+            )
         }
     }
 }
@@ -132,7 +140,8 @@ fun ConversationMessageItem(
 @Composable
 fun MessageBar(
     modifier: Modifier = Modifier,
-    onSend: (String) -> Unit
+    onSend: (String) -> Unit,
+    onCall: () -> Unit
 ) {
     val text = remember { mutableStateOf("") }
     Row(
@@ -150,6 +159,13 @@ fun MessageBar(
                 Icons.Outlined.PhotoCamera, "Send image",
             )
         }
+
+        IconButton(onClick = onCall::invoke) {
+            Icon(
+                Icons.Outlined.Call, "Send image",
+            )
+        }
+
         Box(
             modifier = modifier
                 .weight(weight = 1f)
@@ -180,5 +196,5 @@ fun MessageBar(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    MessageBar {}
+    MessageBar(onSend = {}, onCall = {})
 }
