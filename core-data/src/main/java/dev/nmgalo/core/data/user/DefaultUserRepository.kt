@@ -3,8 +3,8 @@ package dev.nmgalo.core.data.user
 import dev.nmgalo.core.common.Dispatcher
 import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.model.user.User
-import dev.nmgalo.core.network.KatanaNetworkDataSource
 import dev.nmgalo.core.network.model.users.UserDTO
+import dev.nmgalo.core.network.wall.WallNetworkDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class DefaultUserRepository @Inject constructor(
-    private val network: KatanaNetworkDataSource,
+    private val network: WallNetworkDataSource,
     @Dispatcher(KatanaDispatchers.IO)
     private val io: CoroutineDispatcher
 ) : UserRepository {

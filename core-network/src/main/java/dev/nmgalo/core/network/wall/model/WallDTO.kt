@@ -1,4 +1,4 @@
-package dev.nmgalo.core.network.model.wall
+package dev.nmgalo.core.network.wall.model
 
 import kotlinx.serialization.Serializable
 

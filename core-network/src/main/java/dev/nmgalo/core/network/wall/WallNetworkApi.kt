@@ -1,11 +1,11 @@
-package dev.nmgalo.core.network
+package dev.nmgalo.core.network.wall
 
 import dev.nmgalo.core.network.model.users.UserDTO
-import dev.nmgalo.core.network.model.wall.WallDTO
+import dev.nmgalo.core.network.wall.model.WallDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface KatanaNetworkApi {
+interface WallNetworkApi {
     @GET("posts")
     suspend fun getWall(): List<WallDTO>
 

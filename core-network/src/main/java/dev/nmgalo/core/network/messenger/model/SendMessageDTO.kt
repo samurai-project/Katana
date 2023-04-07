@@ -1,4 +1,4 @@
-package dev.nmgalo.core.network.fake.model
+package dev.nmgalo.core.network.messenger.model
 
 import kotlinx.serialization.Serializable
 

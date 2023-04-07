@@ -1,4 +1,4 @@
-package dev.nmgalo.core.network.fake
+package dev.nmgalo.core.network.common.fake
 
 import java.io.InputStream
 

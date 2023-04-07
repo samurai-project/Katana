@@ -1,11 +1,11 @@
-package dev.nmgalo.core.network.fake
+package dev.nmgalo.core.network.messenger
 
 import dev.nmgalo.core.common.Dispatcher
 import dev.nmgalo.core.common.KatanaDispatchers
-import dev.nmgalo.core.network.KatanaNetworkDataSource
-import dev.nmgalo.core.network.fake.model.ChatDTO
-import dev.nmgalo.core.network.fake.model.ChatUsersDTO
-import dev.nmgalo.core.network.fake.model.MessageDTO
+import dev.nmgalo.core.network.common.fake.TestFakeAssetManager
+import dev.nmgalo.core.network.messenger.model.ChatDTO
+import dev.nmgalo.core.network.messenger.model.ChatUsersDTO
+import dev.nmgalo.core.network.messenger.model.MessageDTO
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -15,13 +15,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FakeKatanaNetworkApi @Inject constructor(
+class FakeMessengerNetworkApi @Inject constructor(
     @Dispatcher(KatanaDispatchers.IO)
     private val io: CoroutineDispatcher,
     private val json: Json,
     private val fakeAssetManager: TestFakeAssetManager,
-    private val katanaNetworkDataSource: KatanaNetworkDataSource
-) : KatanaNetworkDataSource by katanaNetworkDataSource {
+    private val messengerNetworkDataSource: MessengerNetworkDataSource
+) : MessengerNetworkDataSource by messengerNetworkDataSource {
 
     @OptIn(ExperimentalSerializationApi::class)
     override suspend fun getConversation(conversationId: Long): List<MessageDTO> =

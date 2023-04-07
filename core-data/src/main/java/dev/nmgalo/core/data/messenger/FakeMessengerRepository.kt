@@ -11,7 +11,8 @@ import dev.nmgalo.core.database.messenger.user.User
 import dev.nmgalo.core.database.messenger.user.UserDao
 import dev.nmgalo.core.model.messenger.ChatUser
 import dev.nmgalo.core.model.messenger.MessageStatus
-import dev.nmgalo.core.network.KatanaNetworkDataSource
+import dev.nmgalo.core.network.messenger.MessengerNetworkDataSource
+import dev.nmgalo.core.network.wall.WallNetworkDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -24,7 +25,7 @@ class FakeMessengerRepository @Inject constructor(
     @Dispatcher(KatanaDispatchers.IO)
     private val io: CoroutineDispatcher,
     @FakeImplementation
-    private val dataSource: KatanaNetworkDataSource,
+    private val dataSource: MessengerNetworkDataSource,
     private val messageDao: MessageDao,
     private val chatDao: ChatDao,
     private val userDao: UserDao,
