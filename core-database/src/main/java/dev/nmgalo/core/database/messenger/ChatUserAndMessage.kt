@@ -19,5 +19,5 @@ data class ChatUserAndMessage(
         parentColumn = "last_message_id",
         entityColumn = "id"
     )
-    val message: Message
+    val message: Message?
 )

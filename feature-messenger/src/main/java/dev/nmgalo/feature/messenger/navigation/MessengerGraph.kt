@@ -5,13 +5,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import dev.nmgalo.core.ui.OnNavigation
 import dev.nmgalo.feature.messenger.ChatSettingsScreen
 import dev.nmgalo.feature.messenger.chat.ChatScreen
 import dev.nmgalo.feature.messenger.conversations.ChatListScreen
 import dev.nmgalo.feature.messenger.p2p.GroupCallScreen
 
 
-fun NavGraphBuilder.messengerGraph(onNavigation: (route: String) -> Unit) {
+fun NavGraphBuilder.messengerGraph(onNavigation: OnNavigation) {
     navigation(startDestination = "list", route = "messenger") {
         composable("list") {
             ChatListScreen(onNavigation::invoke)

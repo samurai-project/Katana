@@ -48,7 +48,7 @@ class FakeMessengerRepository @Inject constructor(
                 id = result.chat.id ?: error("chatId can't be null"),
                 userName = result.user.name,
                 userProfilePicture = result.user.profilePicUrl,
-                lastMessage = result.message.text
+                lastMessage = result.message?.text
             )
         })
     }.flowOn(io)

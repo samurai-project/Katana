@@ -53,7 +53,10 @@ fun ChatScreen(
         ChatState.Loading -> Text("Cool loader.")
         is ChatState.Success -> MessageList(
             conversation = state.conversation,
-            onSend = { viewModel.sendMessage(it) },
+            onSend = {
+                viewModel.sendMessage(it)
+                conversationState.value
+            },
             onCall = { onCall.invoke("group-call/2") },
         )
     }
@@ -156,13 +159,13 @@ fun MessageBar(
         }
         IconButton(onClick = { }) {
             Icon(
-                Icons.Outlined.PhotoCamera, "Send image",
+                Icons.Outlined.PhotoCamera, "Send Image",
             )
         }
 
         IconButton(onClick = onCall::invoke) {
             Icon(
-                Icons.Outlined.Call, "Send image",
+                Icons.Outlined.Call, "Send Image",
             )
         }
 
@@ -177,7 +180,7 @@ fun MessageBar(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(vertical = 10.dp, horizontal = 20.dp),
-                value = if (text.value == "") stringResource(id = R.string.message) else text.value,
+                value = text.value,
                 maxLines = 3,
                 onValueChange = { text.value = it },
                 textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurfaceVariant)

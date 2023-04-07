@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.nmgalo.core.data.messenger.MessengerRepository
 import dev.nmgalo.core.ui.STOP_TIMEOUT_MILLIS
-import dev.nmgalo.feature.messenger.model.Chat
+import dev.nmgalo.feature.messenger.model.toUiModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -30,14 +30,7 @@ class ChatListViewModel @Inject constructor(
 
     val chatListState: StateFlow<ChatListState> = messengerRepository.getAllChats().flatMapLatest {
         if (it.isEmpty()) flowOf(ChatListState.Empty)
-        else flowOf(ChatListState.Success(it.map { chat ->
-            Chat(
-                id = chat.id,
-                userName = chat.userName,
-                userProfilePicture = chat.userProfilePicture,
-                lastMessage = chat.lastMessage
-            )
-        }))
+        else flowOf(ChatListState.Success(it.map { chat -> chat.toUiModel() }))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),

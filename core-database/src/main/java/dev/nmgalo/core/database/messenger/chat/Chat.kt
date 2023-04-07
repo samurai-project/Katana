@@ -11,5 +11,5 @@ data class Chat(
     @ColumnInfo(name = "last_user_id")
     val lastUserId: Long,
     @ColumnInfo(name = "last_message_id")
-    val lastMessageId: Long,
+    val lastMessageId: Long? = null,
 )

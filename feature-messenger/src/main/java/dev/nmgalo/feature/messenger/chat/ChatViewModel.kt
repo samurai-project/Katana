@@ -4,14 +4,19 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.nmgalo.core.common.Dispatcher
+import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.data.messenger.MessengerRepository
 import dev.nmgalo.core.ui.STOP_TIMEOUT_MILLIS
+import dev.nmgalo.feature.messenger.chat.ChatState.Loading
 import dev.nmgalo.feature.messenger.model.Message
 import dev.nmgalo.feature.messenger.model.User
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,13 +31,15 @@ class ChatViewModel @Inject constructor(
     private val chatId =
         savedStateHandle.get<Long>("chatId") ?: error("argument `chatId` is required")
 
-    val chatState = messageRepository.getAllMessageByChatId(chatId = chatId)
-        .flatMapLatest {
-            flowOf(ChatState.Success(it.mapToUiModel()))
-        }.stateIn(
+    val chatState: StateFlow<ChatState> = messageRepository.getAllMessageByChatId(chatId = chatId)
+        .filterNot { it.isEmpty() }
+        .map { it.mapToUiModel() }
+        .map<List<Message>, ChatState>(ChatState::Success)
+        .onStart { emit(Loading) }
+        .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(STOP_TIMEOUT_MILLIS),
-            initialValue = ChatState.Loading
+            initialValue = Loading
         )
 
     fun sendMessage(message: String) {

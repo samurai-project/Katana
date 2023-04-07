@@ -102,7 +102,7 @@ fun UserIdentifierColumn(chat: Chat) {
         Text(text = chat.userName, style = MaterialTheme.typography.titleSmall)
         Spacer(modifier = Modifier.height(2.dp))
         Text(
-            text = chat.lastMessage,
+            text = chat.lastMessage ?: "",
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.labelSmall

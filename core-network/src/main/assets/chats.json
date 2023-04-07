@@ -2,26 +2,26 @@
   {
     "id": 1,
     "lastUserId": 1,
-    "lastMessageId": 2
+    "lastMessageId": 9
   },
   {
     "id": 2,
     "lastUserId": 2,
-    "lastMessageId": 3
+    "lastMessageId": null
   },
   {
     "id": 3,
     "lastUserId": 1,
-    "lastMessageId": 4
+    "lastMessageId": null
   },
   {
     "id": 4,
     "lastUserId": 1,
-    "lastMessageId": 5
+    "lastMessageId": null
   },
   {
     "id": 5,
     "lastUserId": 2,
-    "lastMessageId": 6
+    "lastMessageId": null
   }
 ]

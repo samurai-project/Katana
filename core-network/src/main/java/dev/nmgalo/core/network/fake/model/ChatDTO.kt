@@ -4,5 +4,5 @@ package dev.nmgalo.core.network.fake.model
 data class ChatDTO(
     val id: Long,
     val lastUserId: Long,
-    val lastMessageId: Long
+    val lastMessageId: Long?
 )
