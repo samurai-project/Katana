@@ -1,10 +1,5 @@
 @file:Suppress("DSL_SCOPE_VIOLATION", "UNUSED_VARIABLE")
 
-import com.google.protobuf.gradle.builtins
-import com.google.protobuf.gradle.generateProtoTasks
-import com.google.protobuf.gradle.protobuf
-import com.google.protobuf.gradle.protoc
-
 plugins {
     id("katana.android.library")
     id("katana.android.hilt")
