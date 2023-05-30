@@ -15,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import dev.nmgalo.core.config.RemoteConfigHelper
 import dev.nmgalo.katana.ui.KatanaApp
 import dev.nmgalo.katana.ui.composition.LocalOnFinishDispatcher
 import dev.nmgalo.katana.ui.onboarding.OnBoardingScreen
@@ -22,11 +23,15 @@ import dev.nmgalo.katana.ui.theme.KatanaTheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
+
+    @Inject
+    lateinit var config: RemoteConfigHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

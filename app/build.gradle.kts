@@ -63,11 +63,6 @@ android {
         kotlinCompilerExtensionVersion =
             libs.findVersion("androidxComposeCompiler").get().toString()
     }
-    packagingOptions {
-        resources {
-            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
-        }
-    }
 }
 
 dependencies {
@@ -80,6 +75,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-data"))
     implementation(project(":core-model"))
+    implementation(project(":core-config"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
@@ -95,6 +91,7 @@ dependencies {
     implementation(libs.accompanist.pager)
 
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics)
 
     androidTestImplementation(libs.junit)
