@@ -37,7 +37,7 @@ fun UserInputPreview() {
 fun MessageBarNew(
     modifier: Modifier = Modifier,
     onMessageSent: (String) -> Unit,
-    resetScroll: () -> Unit = {},
+//    resetScroll: () -> Unit = {},
 ) {
     val text = remember { mutableStateOf("") }
     Row(
