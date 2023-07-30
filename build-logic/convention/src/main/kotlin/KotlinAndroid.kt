@@ -30,7 +30,8 @@ internal fun Project.configureKotlinAndroid(
         kotlinOptions {
             freeCompilerArgs = freeCompilerArgs + listOf(
                 "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-                "-opt-in=kotlinx.coroutines.FlowPreview"
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-Xjava-source-roots=$projectDir/build/generated/source/proto/main/java"
             )
             jvmTarget = JavaVersion.VERSION_17.toString()
         }

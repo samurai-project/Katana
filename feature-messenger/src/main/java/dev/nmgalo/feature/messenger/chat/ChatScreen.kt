@@ -32,14 +32,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.nmgalo.core.ui.OnNavigation
-import dev.nmgalo.feature.messenger.R
 import dev.nmgalo.feature.messenger.model.Message
+import dev.nmgalo.feature.messenger.model.User
 
 @Composable
 fun ChatScreen(
@@ -198,6 +197,11 @@ fun MessageBar(
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
-    MessageBar(onSend = {}, onCall = {})
+fun ConversationListPreview() {
+    val user = User(1L, "nmgalo")
+    val mockMessage = listOf(
+        Message(1, "Hello", user, true),
+        Message(1, "Hello again", user, false),
+    )
+    MessageList(mockMessage, onSend = {}, onCall = {})
 }

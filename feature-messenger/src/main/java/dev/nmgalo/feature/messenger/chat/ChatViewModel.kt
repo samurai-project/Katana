@@ -4,8 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.nmgalo.core.common.Dispatcher
-import dev.nmgalo.core.common.KatanaDispatchers
 import dev.nmgalo.core.data.messenger.MessengerRepository
 import dev.nmgalo.core.ui.STOP_TIMEOUT_MILLIS
 import dev.nmgalo.feature.messenger.chat.ChatState.Loading
