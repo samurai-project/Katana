@@ -23,9 +23,9 @@ pipeline {
         }
 
         stage('Deploy Release'){
-            when{
-                branch 'main'
-            }
+            // when{
+            //     branch 'main'
+            // }
             steps{
                 sh "chrmod +x ./gradlew"
                 sh '''export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
