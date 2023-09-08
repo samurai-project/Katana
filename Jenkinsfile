@@ -27,7 +27,7 @@ pipeline {
             //     branch 'main'
             // }
             steps{
-                sh "chrmod +x ./gradlew"
+                sh "chmod +x ./gradlew"
                 sh '''export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
                 ./gradlew assembleRelease appDistributionUploadRelease
                 '''
