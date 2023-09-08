@@ -21,5 +21,17 @@ pipeline {
                 sh './gradlew test'
             }
         }
+
+        stage('Deploy Release'){
+            when{
+                branch 'main'
+            }
+            steps{
+                sh "chrmod +x ./gradlew"
+                sh '''export FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
+                ./gradlew assembleRelease appDistributionUploadRelease
+                '''
+            }
+        }
     }
 }
