@@ -13,7 +13,7 @@ class BaselineProfileGenerator {
     val baselineProfileRule = BaselineProfileRule()
 
     @Test
-    fun generate() = baselineProfileRule.collectBaselineProfile(
+    fun generate() = baselineProfileRule.collect(
         packageName = "dev.nmgalo.katana",
         profileBlock = {
             pressHome()

@@ -11,10 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowRightAlt
+import androidx.compose.material.icons.automirrored.filled.ArrowRightAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -35,7 +34,7 @@ import com.google.accompanist.pager.rememberPagerState
 import dev.nmgalo.katana.R
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalPagerApi::class)
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
@@ -124,7 +123,7 @@ fun OnBoardingControls(
         ) {
             val iconModifier = modifier.fillMaxSize(fraction = 0.75F)
             if (isLastItem) Icon(Icons.Filled.Close, "Close", modifier = iconModifier)
-            else Icon(Icons.Filled.ArrowRightAlt, "Next", modifier = iconModifier)
+            else Icon(Icons.AutoMirrored.Filled.ArrowRightAlt, "Next", modifier = iconModifier)
         }
     }
 }
