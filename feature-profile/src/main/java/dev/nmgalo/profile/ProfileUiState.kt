@@ -4,9 +4,9 @@ import dev.nmgalo.core.model.user.User
 
 sealed interface ProfileUiState {
 
-    object Loading : ProfileUiState
+    data object Loading : ProfileUiState
 
-    object Error : ProfileUiState
+    data object Error : ProfileUiState
 
     data class Success(
         val profile: User

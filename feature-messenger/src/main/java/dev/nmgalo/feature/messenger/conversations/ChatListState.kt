@@ -4,7 +4,7 @@ import dev.nmgalo.feature.messenger.model.Chat
 
 sealed interface ChatListState {
 
-    object Loading : ChatListState
+    data object Loading : ChatListState
 
     object Error : ChatListState
 

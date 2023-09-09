@@ -10,12 +10,12 @@ sealed interface WallUiState {
     /**
      * Loading state
      **/
-    object Loading : WallUiState
+    data object Loading : WallUiState
 
     /**
      * Error state, e.g. network related issue, invalid JSON response.
      **/
-    object Error : WallUiState
+    data object Error : WallUiState
 
     /**
      * Success state, Everything is ok
