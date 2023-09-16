@@ -51,7 +51,12 @@ fun WallScreen(
     val wallState = viewModel.wallState.collectAsState()
     when (val state = wallState.value) {
         WallUiState.Loading -> Loader()
-        WallUiState.Error -> Text("An error occurred, changed this error later!")
+        is WallUiState.Error -> {
+            Box(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp), contentAlignment = Alignment.Center) {
+                Text(state.error?.localizedMessage ?: "")
+            }
+        }
+
         is WallUiState.Success -> PostList(wall = state.wall)
     }
 }

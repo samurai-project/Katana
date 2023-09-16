@@ -15,7 +15,7 @@ sealed interface WallUiState {
     /**
      * Error state, e.g. network related issue, invalid JSON response.
      **/
-    data object Error : WallUiState
+    data class Error(val error: Throwable?) : WallUiState
 
     /**
      * Success state, Everything is ok
