@@ -11,7 +11,6 @@ import dev.nmgalo.core.network.common.ServerConfig
 import dev.nmgalo.core.network.wall.WallNetworkApi
 import dev.nmgalo.core.network.common.fake.FakeAssetManager
 import dev.nmgalo.core.network.messenger.MessengerNetworkApi
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -29,7 +28,6 @@ class NetworkModule {
     }
 
     @Provides
-    @OptIn(ExperimentalSerializationApi::class)
     fun providesNetworkClient(
         jsonSerializer: Json,
         serverConfig: ServerConfig
